@@ -6,7 +6,10 @@ export default class BookCard extends React.Component {
     return (
       <Card
         hoverable
-        cover={<img src={this.props.book.image} alt={this.props.book.name} />}
+        bordered={false}
+        cover={
+          <img src={this.props.book.image} alt={this.props.book.name} loading />
+        }
       >
         <p>{this.props.book.name}</p>
         <Row>
