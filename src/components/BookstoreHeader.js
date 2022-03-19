@@ -22,7 +22,7 @@ export default class BookstoreHeader extends React.Component {
                 src={logo}
                 style={{ height: 40 }}
               />
-              <span style={{ color: "#389e0d", fontSize: 17 }}> Bookstore</span>
+              <span id={"bookstore-text"}> Bookstore</span>
             </a>
           </Col>
           <Col xs={0} sm={0} md={19} lg={19} xl={19} xxl={20}>

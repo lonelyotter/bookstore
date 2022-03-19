@@ -10,14 +10,20 @@
 
 
 #header-container{
-    width:1200px;
+    width:1000px;
     margin:0 auto;
 }
 
 #logo {
     float: left;
+    height: auto;
 }
 
 #avatar {
     float: right;
+}
+
+#bookstore-text{
+    color: #389e0d;
+    font-size: medium;
 }
