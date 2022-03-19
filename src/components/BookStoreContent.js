@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Layout, Row } from "antd";
+import BookSearchBar from "./BookSearchBar";
 import BookStoreCarousel from "./BookStoreCarousel";
 import "./BookStoreContent.css";
 
@@ -11,6 +12,8 @@ class BookStoreContent extends React.Component {
       <Content className={"content"}>
         <Row justify={"center"} style={{ paddingTop: "64px" }}>
           <Col>
+            <BookSearchBar />
+
             <BookStoreCarousel />
           </Col>
         </Row>
