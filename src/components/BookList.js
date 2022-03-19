@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "antd";
 import BookCard from "./BookCard";
-import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroller";
 
 export default class BookList extends React.Component {
   books = require("../assets/books.json").map((book) => (
@@ -43,7 +43,7 @@ export default class BookList extends React.Component {
     return (
       <div style={{ marginTop: "30px" }}>
         <InfiniteScroll
-          next={this.fetchMoreBooks}
+          loadMore={this.fetchMoreBooks}
           hasMore={this.state.hasMore}
           loader={<h4>loading...</h4>}
           dataLength={this.state.displayedBooks.length}
