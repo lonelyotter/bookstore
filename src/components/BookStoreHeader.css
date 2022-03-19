@@ -1,0 +1,23 @@
+#header {
+    position: fixed;
+    z-index: 10;
+    max-width: 100%;
+    background: #fff;
+    -webkit-box-shadow: 0 2px 8px #f0f1f2;
+    box-shadow: 0 2px 8px #f0f1f2;
+    width:100%;
+}
+
+
+#header-container{
+    width:1200px;
+    margin:0 auto;
+}
+
+#logo {
+    float: left;
+}
+
+#avatar {
+    float: right;
+}
