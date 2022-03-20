@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Spin } from "antd";
 import BookCard from "./BookCard";
 import InfiniteScroll from "react-infinite-scroller";
 
@@ -45,8 +45,11 @@ export default class BookList extends React.Component {
         <InfiniteScroll
           loadMore={this.fetchMoreBooks}
           hasMore={this.state.hasMore}
-          loader={<h4>loading...</h4>}
-          dataLength={this.state.displayedBooks.length}
+          loader={
+            <div style={{ textAlign: "center" }}>
+              <Spin tip={"Loading..."} />
+            </div>
+          }
         >
           <Row className={"book-list"}>{this.state.displayedBooks}</Row>
         </InfiniteScroll>
