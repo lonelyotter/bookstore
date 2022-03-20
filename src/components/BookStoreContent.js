@@ -2,7 +2,6 @@ import React from "react";
 import { Col, Layout, Row } from "antd";
 import BookSearchBar from "./BookSearchBar";
 import BookStoreCarousel from "./BookStoreCarousel";
-import "./BookStoreContent.css";
 import BookList from "./BookList";
 
 const { Content } = Layout;

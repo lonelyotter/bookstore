@@ -1,6 +1,5 @@
 import React from "react";
 import { Carousel } from "antd";
-import "./BookStoreCarousel.css";
 
 class BookStoreCarousel extends React.Component {
   createContent = (ctx) => {

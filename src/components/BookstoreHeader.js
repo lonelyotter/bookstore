@@ -3,7 +3,6 @@ import { Layout, Row, Col } from "antd";
 import avatar from "../assets/avatar.jpg";
 import logo from "../assets/logo.svg";
 import UserAvatar from "./UserAvatar";
-import "./BookStoreHeader.css";
 
 const { Header } = Layout;
 
