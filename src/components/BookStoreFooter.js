@@ -7,6 +7,7 @@ export default class BookStoreFooter extends React.Component {
           padding: "30px",
           textAlign: "center",
           backgroundColor: "white",
+          color: "gray",
         }}
       >
         Created by Haochen Song
