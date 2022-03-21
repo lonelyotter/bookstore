@@ -1,21 +1,8 @@
 import React from "react";
-import { Layout } from "antd";
-import BookstoreHeader from "./components/BookstoreHeader";
-import BookStoreContent from "./components/BookStoreContent";
-import BookStoreFooter from "./components/BookStoreFooter";
-import "antd/dist/antd.min.css";
-import "./css/index.css";
+import BasicRoute from "./Router";
 
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
-    return (
-      <Layout>
-        <BookstoreHeader />
-        <BookStoreContent />
-        <BookStoreFooter />
-      </Layout>
-    );
+    return <BasicRoute />;
   }
 }
-
-export default App;
