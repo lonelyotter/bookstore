@@ -6,15 +6,16 @@ import {
   ShoppingCartOutlined,
   FileTextOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 export default class UserAvatar extends React.Component {
   render() {
     const menu = (
       <Menu>
         <Menu.Item key={1} icon={<ShoppingCartOutlined />}>
-          <a href={"#"}>
+          <Link to={"/cart"}>
             <span>我的购物车</span>
-          </a>
+          </Link>
         </Menu.Item>
         <Menu.Item key={2} icon={<FileTextOutlined />}>
           <a href={"#"}>

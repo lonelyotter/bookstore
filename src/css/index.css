@@ -15,7 +15,7 @@
 
 
 #header-container{
-    width:1000px;
+    max-width:1000px;
     margin:0 auto;
 }
 
@@ -43,4 +43,12 @@
     height:315px;
     margin: 0 auto;
     text-align: center;
+}
+
+.footer {
+    margin-top: 64px;
+    padding: 30px;
+    text-align: center;
+    background-color: white;
+    color: gray;
 }

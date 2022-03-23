@@ -1,17 +1,7 @@
 import React from "react";
+import { Footer } from "antd/es/layout/layout";
 export default class BookStoreFooter extends React.Component {
   render() {
-    return (
-      <div
-        style={{
-          padding: "30px",
-          textAlign: "center",
-          backgroundColor: "white",
-          color: "gray",
-        }}
-      >
-        Created by Haochen Song
-      </div>
-    );
+    return <Footer className={"footer"}>Created by Haochen Song</Footer>;
   }
 }
