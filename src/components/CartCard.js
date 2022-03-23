@@ -1,7 +1,6 @@
 import React from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Card, Col, Image, Row } from "antd";
-import "../css/CartCard.css";
 
 export default class CartCard extends React.Component {
   constructor(props) {
@@ -26,12 +25,12 @@ export default class CartCard extends React.Component {
                 }}
               >
                 <h2>{this.props.bookInfo.name}</h2>
-                <h2>
+                <h3>
                   数量：<span>{this.props.num}</span>
-                </h2>
-                <h2 style={{ color: "red" }}>
+                </h3>
+                <h3 style={{ color: "red" }}>
                   ¥{this.props.bookInfo.price * this.props.num}
-                </h2>
+                </h3>
               </div>
             </Col>
             <Col>
