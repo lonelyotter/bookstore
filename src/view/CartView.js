@@ -2,7 +2,6 @@ import React from "react";
 import CartContent from "../components/CartContent";
 import { Content } from "antd/es/layout/layout";
 import { Col, Row } from "antd";
-import BookList from "../components/BookList";
 
 export default class CartView extends React.Component {
   render() {

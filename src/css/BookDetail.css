@@ -1,6 +1,3 @@
-.book-detail{
-    overflow: hidden;
-}
 
 .book-detail .book-image{
     vertical-align: middle;
@@ -18,8 +15,8 @@
 }
 
 .price {
-    font-size: large;
     color:red !important;
+
 }
 
 .inventory {

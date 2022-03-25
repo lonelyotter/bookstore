@@ -23,7 +23,7 @@ export default class BookDetail extends React.Component {
                 />
               </div>
             </Col>
-            <Col>
+            <Col style={{ padding: "0 10px" }}>
               <div className={"descriptions"}>
                 <Descriptions>
                   <Descriptions.Item className={"title"} span={3}>

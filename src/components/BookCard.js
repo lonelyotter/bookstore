@@ -22,8 +22,12 @@ export default class BookCard extends React.Component {
             />
           }
         >
-          <p>{this.props.book.name}</p>
-          <p style={{ color: "red" }}>¥ {this.props.book.price}</p>
+          <p style={{ fontWeight: "bold", fontSize: "large" }}>
+            {this.props.book.name}
+          </p>
+          <p style={{ color: "red", fontWeight: "bold" }}>
+            ¥ {this.props.book.price}
+          </p>
           <p style={{ color: "gray" }}>库存{this.props.book.inventory}件</p>
         </Card>
       </Link>
