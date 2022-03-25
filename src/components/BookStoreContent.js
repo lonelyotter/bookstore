@@ -1,24 +1,24 @@
 import React from "react";
-import { Col, Layout, Row } from "antd";
-import BookSearchBar from "./BookSearchBar";
+import { Col, Divider, Layout, Row } from "antd";
 import BookStoreCarousel from "./BookStoreCarousel";
 import BookList from "./BookList";
-
-const { Content } = Layout;
+import { FireOutlined } from "@ant-design/icons";
 
 class BookStoreContent extends React.Component {
   render() {
     return (
-      <Content className={"content"}>
-        <BookSearchBar />
-
-        <Row justify={"center"} style={{ paddingTop: "20px" }}>
+      <div>
+        <Row justify={"center"} style={{ marginBottom: "50px" }}>
           <Col>
             <BookStoreCarousel />
           </Col>
         </Row>
+        <Divider style={{ fontSize: "x-large" }}>
+          <FireOutlined style={{ color: "red" }} />
+          <span> 热门书籍</span>
+        </Divider>
         <BookList />
-      </Content>
+      </div>
     );
   }
 }

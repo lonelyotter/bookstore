@@ -47,7 +47,7 @@ export default class BookList extends React.Component {
 
   render() {
     return (
-      <div style={{ marginTop: "30px" }}>
+      <div>
         <InfiniteScroll
           loadMore={this.fetchMoreBooks}
           hasMore={this.state.hasMore}
@@ -57,9 +57,18 @@ export default class BookList extends React.Component {
             </div>
           }
         >
-          <Row className={"book-list"}>
+          <Row>
             {this.state.displayedBooks.map((book) => (
-              <Col key={book.id} span={6} style={{ padding: "10px" }}>
+              <Col
+                key={book.id}
+                span={6}
+                style={{ padding: "0 10px 20px 10px" }}
+                xs={12}
+                sm={12}
+                md={6}
+                lg={6}
+                xl={6}
+              >
                 <BookCard book={book} />
               </Col>
             ))}

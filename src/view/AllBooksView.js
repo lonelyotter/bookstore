@@ -1,9 +1,5 @@
 import React from "react";
-import { Layout } from "antd";
-import BookstoreHeader from "../components/BookstoreHeader";
-import BookStoreFooter from "../components/BookStoreFooter";
-import "antd/dist/antd.min.css";
-import "../css/index.css";
+import { Col, Layout, Row } from "antd";
 import BookList from "../components/BookList";
 
 const { Content } = Layout;
@@ -11,13 +7,13 @@ const { Content } = Layout;
 export default class AllBooksView extends React.Component {
   render() {
     return (
-      <Layout>
-        <BookstoreHeader />
-        <Content className={"content"}>
-          <BookList />
-        </Content>
-        <BookStoreFooter />
-      </Layout>
+      <Content className={"content"}>
+        <Row justify={"center"}>
+          <Col xs={22} sm={20} md={18} lg={16} xl={14}>
+            <BookList />
+          </Col>
+        </Row>
+      </Content>
     );
   }
 }

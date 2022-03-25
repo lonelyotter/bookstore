@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Row, Col } from "antd";
+import { Card } from "antd";
 import { Link } from "react-router-dom";
 
 export default class BookCard extends React.Component {
@@ -10,7 +10,6 @@ export default class BookCard extends React.Component {
           pathname: "/bookDetail",
           search: "?id=" + this.props.book.id,
         }}
-        target="_blank"
       >
         <Card
           hoverable
@@ -24,14 +23,8 @@ export default class BookCard extends React.Component {
           }
         >
           <p>{this.props.book.name}</p>
-          <Row>
-            <Col span={12} style={{ color: "red" }}>
-              ¥ {this.props.book.price}
-            </Col>
-            <Col span={12} style={{ color: "gray", textAlign: "right" }}>
-              库存{this.props.book.inventory}件
-            </Col>
-          </Row>
+          <p style={{ color: "red" }}>¥ {this.props.book.price}</p>
+          <p style={{ color: "gray" }}>库存{this.props.book.inventory}件</p>
         </Card>
       </Link>
     );

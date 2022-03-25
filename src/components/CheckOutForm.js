@@ -1,6 +1,5 @@
 import React from "react";
-import { Content } from "antd/es/layout/layout";
-import { Button, Form, Input, InputNumber } from "antd";
+import { Button, Form, Input } from "antd";
 
 export default class CheckOutForm extends React.Component {
   render() {
@@ -39,26 +38,31 @@ export default class CheckOutForm extends React.Component {
             <Input />
           </Form.Item>
           <Form.Item
-            name={["user", "address"]}
+            name={["address"]}
             label="收货地址"
             rules={[{ required: true }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name={["user", "telephone"]}
+            name={["telephone"]}
             label="手机号"
             rules={[{ required: true }]}
           >
             <Input />
           </Form.Item>
-          <Form.Item name={["user", "introduction"]} label="备注">
+          <Form.Item name={["remarks"]} label="备注">
             <Input.TextArea />
           </Form.Item>
           <Form.Item wrapperCol={{ flex: "right" }}>
             <div style={{ textAlign: "center" }}>
-              <Button type="primary" htmlType="submit" style={{ width: "50%" }}>
-                Submit
+              <Button
+                size={"large"}
+                type="primary"
+                htmlType="submit"
+                style={{ width: "30%" }}
+              >
+                提交订单
               </Button>
             </div>
           </Form.Item>

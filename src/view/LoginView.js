@@ -1,7 +1,6 @@
 import React from "react";
 import "../components/LoginForm";
 import LoginForm from "../components/LoginForm";
-import "antd/dist/antd.min.css";
 import "../css/login.css";
 
 export default class LoginView extends React.Component {

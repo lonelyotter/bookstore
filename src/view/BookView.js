@@ -1,10 +1,6 @@
 import React from "react";
-import { Layout } from "antd";
-import BookstoreHeader from "../components/BookstoreHeader";
 import BookDetail from "../components/BookDetail";
-import BookStoreFooter from "../components/BookStoreFooter";
-import "antd/dist/antd.min.css";
-import "../css/index.css";
+import { Col, Row } from "antd";
 import { Content } from "antd/es/layout/layout";
 
 export default class BookView extends React.Component {
@@ -16,13 +12,13 @@ export default class BookView extends React.Component {
     const info = books[bookId - 1];
 
     return (
-      <Layout>
-        <BookstoreHeader />
-        <Content>
-          <BookDetail info={info} />
-        </Content>
-        <BookStoreFooter />
-      </Layout>
+      <Content className={"content"}>
+        <Row justify={"center"}>
+          <Col xs={22} sm={20} md={18} lg={16} xl={14}>
+            <BookDetail info={info} />
+          </Col>
+        </Row>
+      </Content>
     );
   }
 }

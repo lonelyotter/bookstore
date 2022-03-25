@@ -18,9 +18,9 @@ export default class UserAvatar extends React.Component {
           </Link>
         </Menu.Item>
         <Menu.Item key={2} icon={<FileTextOutlined />}>
-          <a href={"#"}>
+          <Link to={"/order"}>
             <span>我的订单</span>
-          </a>
+          </Link>
         </Menu.Item>
         <Menu.Item key={3} icon={<UserOutlined />}>
           <a href={"#"}>

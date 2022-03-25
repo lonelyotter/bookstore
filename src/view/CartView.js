@@ -1,19 +1,19 @@
 import React from "react";
-import { Layout } from "antd";
-import BookstoreHeader from "../components/BookstoreHeader";
-import BookStoreFooter from "../components/BookStoreFooter";
-import "antd/dist/antd.min.css";
-import "../css/index.css";
 import CartContent from "../components/CartContent";
+import { Content } from "antd/es/layout/layout";
+import { Col, Row } from "antd";
+import BookList from "../components/BookList";
 
 export default class CartView extends React.Component {
   render() {
     return (
-      <Layout>
-        <BookstoreHeader />
-        <CartContent />
-        <BookStoreFooter />
-      </Layout>
+      <Content className={"content"}>
+        <Row justify={"center"}>
+          <Col xs={22} sm={20} md={18} lg={16} xl={14}>
+            <CartContent />
+          </Col>
+        </Row>
+      </Content>
     );
   }
 }

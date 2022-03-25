@@ -1,18 +1,14 @@
 .book-detail{
-    margin-top: 60px;
-    height:400px;
     overflow: hidden;
 }
 
 .book-detail .book-image{
-    float:left;
     vertical-align: middle;
 }
 
 .book-detail .descriptions{
     margin-top:10px;
     margin-left:20px;
-    float:left;
     width:380px;
 }
 

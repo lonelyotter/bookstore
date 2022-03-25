@@ -10,7 +10,7 @@ class BookStoreCarousel extends React.Component {
       console.log(img);
       result.push(
         <div key={i}>
-          <img alt={i} src={img} />
+          <img alt={"poster " + i.toString()} src={img} />
         </div>
       );
     }
