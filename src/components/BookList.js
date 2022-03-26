@@ -2,7 +2,6 @@ import React from "react";
 import { Col, Row, Spin } from "antd";
 import BookCard from "./BookCard";
 import InfiniteScroll from "react-infinite-scroller";
-import books from "../assets/books.json";
 
 export default class BookList extends React.Component {
   constructor(props) {
@@ -14,6 +13,16 @@ export default class BookList extends React.Component {
       hasMore: props.books.length > 8,
       displayedBooks: props.books.slice(0, 8),
     };
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.books !== prevState.books) {
+      this.setState(() => ({
+        books: this.props.books,
+        hasMore: this.props.books.length > 8,
+        displayedBooks: this.props.books.slice(0, 8),
+      }));
+    }
   }
 
   fetchMoreBooks = () => {
