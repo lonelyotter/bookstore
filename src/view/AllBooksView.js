@@ -6,11 +6,12 @@ const { Content } = Layout;
 
 export default class AllBooksView extends React.Component {
   render() {
+    const books = require("../assets/books.json");
     return (
       <Content className={"content"}>
         <Row justify={"center"}>
           <Col xs={22} sm={20} md={18} lg={16} xl={14}>
-            <BookList />
+            <BookList books={books} />
           </Col>
         </Row>
       </Content>

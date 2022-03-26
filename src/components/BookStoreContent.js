@@ -6,6 +6,7 @@ import { FireOutlined } from "@ant-design/icons";
 
 class BookStoreContent extends React.Component {
   render() {
+    const books = require("../assets/books.json");
     return (
       <div>
         <Row justify={"center"} style={{ marginBottom: "50px" }}>
@@ -17,7 +18,7 @@ class BookStoreContent extends React.Component {
           <FireOutlined style={{ color: "red" }} />
           <span> 热门书籍</span>
         </Divider>
-        <BookList />
+        <BookList books={books} />
       </div>
     );
   }

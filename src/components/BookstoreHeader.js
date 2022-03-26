@@ -3,13 +3,13 @@ import { Layout, Row, Col, Menu, Input, Popover } from "antd";
 import avatar from "../assets/avatar.jpg";
 import logo from "../assets/logo.svg";
 import UserAvatar from "./UserAvatar";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { SearchOutlined } from "@ant-design/icons";
 
 const { Header } = Layout;
 const { Search } = Input;
 
-export default class BookstoreHeader extends React.Component {
+class BookstoreHeader extends React.Component {
   render() {
     const user = { name: "Haochen Song", avatar: avatar };
 
@@ -50,19 +50,29 @@ export default class BookstoreHeader extends React.Component {
               </Menu.Item>
             </Menu>
           </Col>
-          {/*search large*/}
+          {/*search*/}
           <Col xs={0} md={8} lg={10}>
             <Search
               placeholder="搜索书籍或作者"
               allowClear
               enterButton
               style={{ marginTop: 8 }}
+              onSearch={(query) =>
+                this.props.history.push("/search?query=" + query)
+              }
             />
           </Col>
-          {/*search small*/}
           <Col xs={1} md={0}>
             <Popover
-              content={<Input.Search placeholder="search" enterButton />}
+              content={
+                <Input.Search
+                  placeholder="search"
+                  enterButton
+                  onSearch={(query) =>
+                    this.props.history.push("/search?query=" + query)
+                  }
+                />
+              }
               placement="bottom"
             >
               <SearchOutlined style={{ fontSize: "1.4em", marginTop: 14 }} />
@@ -77,3 +87,5 @@ export default class BookstoreHeader extends React.Component {
     );
   }
 }
+
+export default withRouter(BookstoreHeader);
