@@ -10,7 +10,7 @@ export default class CartCard extends React.Component {
     return (
       <div style={{ margin: "30px", width: "500px" }} align={"center"}>
         <Card>
-          <Row align={"middle"} justify={"space-between"} warp={false}>
+          <Row align={"middle"} justify={"space-between"} warp="false">
             <Col>
               <Image src={this.props.bookInfo.image} width={150} />
             </Col>

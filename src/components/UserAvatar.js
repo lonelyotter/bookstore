@@ -5,6 +5,7 @@ import {
   LogoutOutlined,
   ShoppingCartOutlined,
   FileTextOutlined,
+  EditOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
@@ -25,6 +26,11 @@ export default class UserAvatar extends React.Component {
         <Menu.Item key={3} icon={<UserOutlined />}>
           <a href={"#"}>
             <span>个人中心</span>
+          </a>
+        </Menu.Item>
+        <Menu.Item key={4} icon={<EditOutlined />}>
+          <a href={"#"}>
+            <span>编辑图书</span>
           </a>
         </Menu.Item>
         <Menu.Divider />
