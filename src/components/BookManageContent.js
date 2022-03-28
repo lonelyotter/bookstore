@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Button, Col, Divider, Row, Space, Table } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { Modal, Button, Col, Divider, Row, Space, Table } from "antd";
+import { EditOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import Search from "antd/es/input/Search";
 import BookEdit from "./BookEdit";
+const { confirm } = Modal;
 
 export default function BookManageContent() {
   const [books, setBooks] = useState([
@@ -86,6 +87,21 @@ export default function BookManageContent() {
     setBooks(books.filter((book) => book.isbn !== isbn));
   };
 
+  function showDeleteConfirm(name, isbn) {
+    confirm({
+      title: "确定删除书籍：" + name + "?",
+      icon: <ExclamationCircleOutlined />,
+      okText: "确定",
+      okButtonProps: { danger: true },
+      okType: "primary",
+      cancelText: "取消",
+      autoFocusButton: null,
+      onOk() {
+        deleteBook(isbn);
+      },
+    });
+  }
+
   const columns = [
     {
       title: "ISBN",
@@ -137,7 +153,7 @@ export default function BookManageContent() {
             <Button
               type={"primary"}
               danger
-              onClick={() => deleteBook(record.isbn)}
+              onClick={() => showDeleteConfirm(record.name, record.isbn)}
             >
               删除
             </Button>
