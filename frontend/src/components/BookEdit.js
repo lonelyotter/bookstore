@@ -4,6 +4,7 @@ import { Button, Divider, Form, Input, InputNumber } from "antd";
 export default function BookEdit(props) {
   const [form] = Form.useForm();
 
+  /* eslint-disable no-template-curly-in-string */
   const validateMessages = {
     required: "${label} is required!",
     types: {
