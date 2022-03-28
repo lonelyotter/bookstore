@@ -9,6 +9,7 @@ import { Layout } from "antd";
 import BookstoreHeader from "./components/BookstoreHeader";
 import BookStoreFooter from "./components/BookStoreFooter";
 import SearchView from "./view/SearchView";
+import BookManageView from "./view/BookManageView";
 
 export default class PrivateRoute extends React.Component {
   render() {
@@ -20,7 +21,8 @@ export default class PrivateRoute extends React.Component {
           <Route path="/books" component={AllBooksView} />
           <Route path="/bookDetail" component={BookView} />
           <Route path="/cart" component={CartView} />
-          <Route path="/order" component={OrdersView} />
+          <Route path="/orders" component={OrdersView} />
+          <Route path="/bookManage" component={BookManageView} />
           <Route path="/search" component={SearchView} />
           <Route path="/*" component={HomeView} />
         </Switch>

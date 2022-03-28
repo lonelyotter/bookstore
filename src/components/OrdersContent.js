@@ -9,7 +9,7 @@ export default function OrdersContent() {
   const [books, setBooks] = useState([
     {
       name: "深入理解计算机系统",
-      price: 40,
+      price: 65,
       purchaseDate: new Date("December 17, 2017 03:24:00"),
     },
     {
@@ -24,7 +24,7 @@ export default function OrdersContent() {
     },
     {
       name: "老人与海",
-      price: 70,
+      price: 20,
       purchaseDate: new Date("June 17, 2020 09:24:00"),
     },
     {
@@ -45,16 +45,17 @@ export default function OrdersContent() {
       title: "价格",
       dataIndex: "price",
       key: "price",
-      sortDirections: ["ascend", "descend", "ascend"],
+      sortDirections: ["ascend", "descend"],
       sorter: (a, b) => a.price - b.price,
     },
     {
       title: "购买时间",
       dataIndex: "purchaseDate",
       key: "purchaseDate",
-      sortDirections: ["ascend", "descend", "ascend"],
+      sortDirections: ["ascend", "descend"],
       render: (date) => date.toLocaleString(),
-      sorter: (a, b) => new Date(a.purchaseDate) - new Date(b.purchaseDate),
+      sorter: (a, b) => a.purchaseDate - b.purchaseDate,
+      defaultSortOrder: "descend",
     },
   ];
 

@@ -19,7 +19,7 @@ export default class UserAvatar extends React.Component {
           </Link>
         </Menu.Item>
         <Menu.Item key={2} icon={<FileTextOutlined />}>
-          <Link to={"/order"}>
+          <Link to={"/orders"}>
             <span>我的订单</span>
           </Link>
         </Menu.Item>
@@ -29,12 +29,12 @@ export default class UserAvatar extends React.Component {
           </a>
         </Menu.Item>
         <Menu.Item key={4} icon={<EditOutlined />}>
-          <a href={"#"}>
-            <span>编辑图书</span>
-          </a>
+          <Link to={"/bookManage"}>
+            <span>书籍管理</span>
+          </Link>
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key={4} icon={<LogoutOutlined />} danger>
+        <Menu.Item key={5} icon={<LogoutOutlined />} danger>
           <a href={"#"}>
             <span>退出登录</span>
           </a>
