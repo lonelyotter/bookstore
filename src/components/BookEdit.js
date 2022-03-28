@@ -96,7 +96,7 @@ export default function BookEdit(props) {
                 },
               ]}
             >
-              <InputNumber style={{ width: "100%" }} />
+              <Input />
             </Form.Item>
             <Form.Item
               labelCol={{ span: 4 }}
