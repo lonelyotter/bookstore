@@ -19,7 +19,7 @@ export default class PrivateRoute extends React.Component {
         <Switch>
           <Route path="/home" component={HomeView} />
           <Route path="/books" component={AllBooksView} />
-          <Route path="/bookDetail" component={BookView} />
+          <Route path="/book/:bookId" component={BookView} />
           <Route path="/cart" component={CartView} />
           <Route path="/orders" component={OrdersView} />
           <Route path="/bookManage" component={BookManageView} />

@@ -2,13 +2,11 @@ import React from "react";
 import BookDetail from "../components/BookDetail";
 import { Col, Row } from "antd";
 import { Content } from "antd/es/layout/layout";
+import {useParams} from "react-router-dom";
 
-export default class BookView extends React.Component {
-  render() {
+export default function BookView() {
     const books = require("../assets/books.json");
-    const query = this.props.location.search;
-    const arr = query.split("&");
-    const bookId = arr[0].substr(4);
+    const {bookId} = useParams();
     const info = books[bookId - 1];
 
     return (
@@ -20,5 +18,4 @@ export default class BookView extends React.Component {
         </Row>
       </Content>
     );
-  }
 }

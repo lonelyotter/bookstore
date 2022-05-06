@@ -7,8 +7,7 @@ export default class BookCard extends React.Component {
     return (
       <Link
         to={{
-          pathname: "/bookDetail",
-          search: "?id=" + this.props.book.id,
+          pathname: "/book/" + this.props.book.id,
         }}
       >
         <Card
