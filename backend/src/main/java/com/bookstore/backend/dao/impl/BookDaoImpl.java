@@ -25,6 +25,6 @@ public class BookDaoImpl implements BookDao {
     public Book getBook(Integer id) {
         return jdbcTemplate.query(
                 "SELECT * FROM book WHERE id = " + id.toString(),
-               new BeanPropertyRowMapper<>(Book.class)).get(0);
+                new BeanPropertyRowMapper<>(Book.class)).get(0);
     }
 }

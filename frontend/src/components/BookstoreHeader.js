@@ -58,7 +58,9 @@ class BookstoreHeader extends React.Component {
               enterButton
               style={{ marginTop: 8 }}
               onSearch={(query) =>
-                this.props.history.push("/search?query=" + query)
+                this.props.history.push(
+                  "/search?query=" + encodeURIComponent(query)
+                )
               }
             />
           </Col>
@@ -69,7 +71,9 @@ class BookstoreHeader extends React.Component {
                   placeholder="search"
                   enterButton
                   onSearch={(query) =>
-                    this.props.history.push("/search?query=" + query)
+                    this.props.history.push(
+                      "/search?query=" + encodeURIComponent(query)
+                    )
                   }
                 />
               }
