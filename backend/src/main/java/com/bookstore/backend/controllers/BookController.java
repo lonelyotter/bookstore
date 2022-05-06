@@ -23,8 +23,8 @@ public class BookController {
     }
 
     @CrossOrigin
-    @GetMapping("/api/book")
-    public Book getBook(@RequestParam int id) {
+    @GetMapping("/api/book/{id}")
+    public Book getBook(@PathVariable int id) {
         return bookService.getBook(id);
     }
 }

@@ -7,7 +7,6 @@ class BookStoreCarousel extends React.Component {
     let result = [];
     for (let i = 0; i < ctx.keys().length; i++) {
       let img = images[i];
-      console.log(img);
       result.push(
         <div key={i}>
           <img alt={"poster " + i.toString()} src={img} />
