@@ -12,5 +12,6 @@ public class Book {
     private String image;
     private Double price;
     private Integer inventory;
+    private String type;
 
 }
