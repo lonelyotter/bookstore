@@ -21,4 +21,9 @@ public class CartDaoImpl implements CartDao {
         String sql = "SELECT cart.id as id, cart.bookId as bookId, book.name as name, book.price as price, book.image as image FROM cart, book WHERE cart.userId = " + userId + " and cart.bookId = book.id";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItem.class));
     }
+
+    @Override
+    public void deleteCartItem(Integer id) {
+        jdbcTemplate.update("DELETE FROM cart where id = " + id);
+    }
 }

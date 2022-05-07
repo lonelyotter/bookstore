@@ -11,3 +11,7 @@ export function getBook(id) {
 export function getCartItems(userId) {
   return fetch(url + "cart?userId=" + userId).then((r) => r.json());
 }
+
+export function deleteCartItem(id) {
+  return fetch(url + "cart?id=" + id, { method: "DELETE" });
+}

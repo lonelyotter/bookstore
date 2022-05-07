@@ -3,6 +3,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Card, Col, Image, Row } from "antd";
 
 export default function CartCard(props) {
+  console.log(props);
   return (
     <div style={{ margin: "30px", width: "500px" }} align={"center"}>
       <Card>
@@ -25,7 +26,12 @@ export default function CartCard(props) {
             </div>
           </Col>
           <Col>
-            <Button type={"primary"} danger icon={<DeleteOutlined />}>
+            <Button
+              type={"primary"}
+              danger
+              icon={<DeleteOutlined />}
+              onClick={() => props.removeItem(props.bookInfo.id)}
+            >
               移除
             </Button>
           </Col>

@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from "react";
 import CartCard from "./CartCard";
-import { getCartItems } from "../services/api";
+import { deleteCartItem, getCartItems } from "../services/api";
 
 export default function CartList() {
   const userId = 1;
 
   const [cartItems, setCartItems] = useState([]);
+
   useEffect(() => {
     getCartItems(userId).then((cartItems) => setCartItems(cartItems));
   }, []);
+
+  const updateCart = () =>
+    getCartItems(userId).then((cartItems) => setCartItems(cartItems));
+
+  const removeItem = (id) => {
+    deleteCartItem(id).then(updateCart);
+  };
 
   return (
     <div align={"middle"}>
       <div>
         {cartItems.map((cartItem) => (
-          <CartCard bookInfo={cartItem} />
+          <CartCard
+            bookInfo={cartItem}
+            removeItem={removeItem}
+            key={cartItem.id}
+          />
         ))}
       </div>
-      {/*<div>*/}
-      {/*  <h1*/}
-      {/*    style={{*/}
-      {/*      textAlign: "center",*/}
-      {/*      fontSize: "xx-large",*/}
-      {/*    }}*/}
-      {/*  >*/}
-      {/*    合计：*/}
-      {/*    <span style={{ color: "red" }}>¥{this.state.totalPrice}</span>*/}
-      {/*  </h1>*/}
-      {/*</div>*/}
     </div>
   );
 }
