@@ -200,10 +200,8 @@ export default function BookManageContent() {
         </Col>
         <Col span={24} style={{ marginTop: "10px" }}>
           <Table
-            dataSource={books.filter(
-              (book) =>
-                book.author.toLowerCase().includes(searchText) ||
-                book.name.toLowerCase().includes(searchText)
+            dataSource={books.filter((book) =>
+              book.name.toLowerCase().includes(searchText)
             )}
             columns={columns}
             bordered={true}

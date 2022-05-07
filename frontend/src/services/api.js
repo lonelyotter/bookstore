@@ -7,3 +7,7 @@ export function getBooks() {
 export function getBook(id) {
   return fetch(url + "book/" + id).then((r) => r.json());
 }
+
+export function getCartItems(userId) {
+  return fetch(url + "cart?userId=" + userId).then((r) => r.json());
+}
