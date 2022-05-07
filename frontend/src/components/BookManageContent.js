@@ -3,6 +3,7 @@ import { Modal, Button, Col, Divider, Row, Table } from "antd";
 import { EditOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import Search from "antd/es/input/Search";
 import BookEdit from "./BookEdit";
+
 const { confirm } = Modal;
 
 export default function BookManageContent() {
@@ -202,7 +203,7 @@ export default function BookManageContent() {
             dataSource={books.filter(
               (book) =>
                 book.author.toLowerCase().includes(searchText) ||
-                book.title.toLowerCase().includes(searchText)
+                book.name.toLowerCase().includes(searchText)
             )}
             columns={columns}
             bordered={true}

@@ -3,6 +3,7 @@ import { Col, Divider, Row } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
 import { DatePicker, Table } from "antd";
 import Search from "antd/es/input/Search";
+
 const { RangePicker } = DatePicker;
 
 export default function OrdersContent() {
@@ -48,6 +49,7 @@ export default function OrdersContent() {
       sortDirections: ["ascend", "descend"],
       sorter: (a, b) => a.price - b.price,
     },
+
     {
       title: "购买时间",
       dataIndex: "purchaseDate",

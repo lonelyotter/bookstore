@@ -42,15 +42,6 @@ export default class LoginForm extends React.Component {
             placeholder="Password"
           />
         </Form.Item>
-        <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>记住我</Checkbox>
-          </Form.Item>
-
-          <a className="login-form-forgot" href="">
-            忘记密码
-          </a>
-        </Form.Item>
 
         <Form.Item>
           <Button
