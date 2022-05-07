@@ -26,4 +26,9 @@ public class CartDaoImpl implements CartDao {
     public void deleteCartItem(Integer id) {
         jdbcTemplate.update("DELETE FROM cart where id = " + id);
     }
+
+    @Override
+    public void addCartItem(Integer userId, Integer bookId) {
+        jdbcTemplate.update("INSERT INTO cart (userId, bookId) VALUES(" + userId + ", " + bookId + ")");
+    }
 }

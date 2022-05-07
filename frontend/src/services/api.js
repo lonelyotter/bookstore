@@ -15,3 +15,13 @@ export function getCartItems(userId) {
 export function deleteCartItem(id) {
   return fetch(url + "cart?id=" + id, { method: "DELETE" });
 }
+
+export function addCartItem(userId, bookId) {
+  return fetch(url + "cart", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userId: userId, bookId: bookId }),
+  });
+}

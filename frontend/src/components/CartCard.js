@@ -3,7 +3,6 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Card, Col, Image, Row } from "antd";
 
 export default function CartCard(props) {
-  console.log(props);
   return (
     <div style={{ margin: "30px", width: "500px" }} align={"center"}>
       <Card>

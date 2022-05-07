@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Descriptions, Button, Image, Row, Col } from "antd";
 import "../css/BookDetail.css";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { getBook } from "../services/api";
+import { addCartItem, getBook } from "../services/api";
 import { useParams } from "react-router-dom";
 
 export default function BookDetail() {
   let { bookId } = useParams();
+  const userId = 1;
 
   const [book, setBook] = useState({});
   useEffect(() => {
@@ -66,7 +67,12 @@ export default function BookDetail() {
         </Row>
       </div>
       <div className={"button-groups"}>
-        <Button type="danger" icon={<ShoppingCartOutlined />} size={"large"}>
+        <Button
+          type="danger"
+          icon={<ShoppingCartOutlined />}
+          size={"large"}
+          onClick={() => addCartItem(userId, bookId)}
+        >
           加入购物车
         </Button>
       </div>
