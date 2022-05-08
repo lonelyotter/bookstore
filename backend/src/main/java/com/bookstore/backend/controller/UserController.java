@@ -13,28 +13,24 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
-@RequestMapping("/api")
 @CrossOrigin
-public class AuthController {
+@RequestMapping("/api")
+public class UserController {
 
     @Autowired
-    UserService authService;
+    UserService userService;
 
     @PostMapping("/register")
     public void register(@RequestBody Map<String, String> body) {
         String username = body.get("username");
         String password = body.get("password");
         String email = body.get("email");
-        System.out.println("register!!!!!!");
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println(email);
-        authService.register(username, password, email);
+        userService.register(username, password, email);
     }
 
     @GetMapping("/login")
     public String login() {
-        System.out.println("login!!!!!!!!!!");
+        System.out.println("login");
         return "Welcome";
     }
 }

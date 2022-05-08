@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class BookController {
 
@@ -14,13 +15,11 @@ public class BookController {
     @Autowired
     BookService bookService;
 
-    @CrossOrigin
     @GetMapping("/api/books")
     public List<Book> getBooks() {
         return bookService.getBooks();
     }
 
-    @CrossOrigin
     @GetMapping("/api/book/{id}")
     public Book getBook(@PathVariable Integer id) {
         return bookService.getBook(id);

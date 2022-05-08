@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const url = "http://localhost:8080/api/";
 
 export function getBooks() {
@@ -39,5 +41,18 @@ export function addCartItem(userId, bookId) {
     body: JSON.stringify({ userId: userId, bookId: bookId }),
   }).catch((error) => {
     console.log(error);
+  });
+}
+
+const instance = axios.create({
+  baseURL: "http://localhost:8080/api",
+});
+
+export function login(username, password) {
+  return new Promise((resolve, reject) => {
+    instance
+      .get("/login", { auth: { username: username, password: password } })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
   });
 }
