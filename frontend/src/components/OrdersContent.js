@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Col, Divider, Row } from "antd";
+import { Col, Divider, Row, Space } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
 import { DatePicker, Table } from "antd";
 import Search from "antd/es/input/Search";
 import { getOrders } from "../services/api";
+import { Link } from "react-router-dom";
 
 const { RangePicker } = DatePicker;
 
@@ -18,7 +19,7 @@ export default function OrdersContent() {
           name: order.name,
           address: order.address,
           phone: order.phone,
-          price: 100,
+          price: order.price,
           purchaseDate: new Date(Date.parse(order.time)),
           key: order.id,
         };
@@ -67,6 +68,16 @@ export default function OrdersContent() {
       dataIndex: "price",
       key: "price",
       sorter: (a, b) => a.price - b.price,
+    },
+    {
+      title: "查看详情",
+      dataIndex: "orderId",
+      key: "orderId",
+      render: (id) => (
+        <Space size={"middle"}>
+          <Link to={"/order/" + id}>详情</Link>
+        </Space>
+      ),
     },
   ];
 

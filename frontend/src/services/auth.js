@@ -12,7 +12,7 @@ export function login(username, password) {
     .then((res) => {
       Cookies.set("user", JSON.stringify(res.data));
     })
-    .catch((err) => err.response.data);
+    .catch((err) => err);
 }
 
 // 登出并删除cookie

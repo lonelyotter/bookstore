@@ -1,7 +1,6 @@
 package com.bookstore.backend.dao.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.bookstore.backend.dao.UserDao;
 import com.bookstore.backend.entity.User;
@@ -19,7 +18,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void register(String username, String password, String email) {
-        String sql = "INSERT INTO user(username, password, email, isAdmin, isEnable) VALUES ('" + username + "', '" + password + "', '" + email + "', " + 0 + ", " + 1 + ")";
+        String sql = "INSERT INTO user(username, password, email, isAdmin, isEnabled) VALUES ('" + username + "', '" + password + "', '" + email + "', " + 0 + ", " + 1 + ")";
         jdbcTemplate.update(sql);
     }
 

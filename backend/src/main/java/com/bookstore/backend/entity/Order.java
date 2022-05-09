@@ -13,4 +13,5 @@ public class Order {
     private String address;
     private String phone;
     private String note;
+    private Double price;
 }

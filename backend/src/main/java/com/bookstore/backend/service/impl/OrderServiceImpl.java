@@ -1,6 +1,7 @@
 package com.bookstore.backend.service.impl;
 
 import com.bookstore.backend.dao.OrderDao;
+import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.service.CartService;
 import com.bookstore.backend.service.OrderService;
@@ -25,7 +26,13 @@ public class OrderServiceImpl implements OrderService {
         List<CartItem> items = cartService.getCartItems(userId);
         if (items.isEmpty())
             return "购物车没有商品";
-        Integer orderId = orderDao.createOrder(userId, name, phone, address, note);
+
+        Double totalPrice = 0.0;
+        for (CartItem item : items) {
+            totalPrice += item.getPrice();
+        }
+        
+        Integer orderId = orderDao.createOrder(userId, name, phone, address, note, totalPrice);
         items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBookId()));
         cartService.clearCart(userId);
         return "购买成功";
@@ -34,5 +41,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getOrders(Integer userId) {
         return orderDao.getOrders(userId);
+    }
+
+    @Override
+    public List<Book> getOrderDetail(Integer id) {
+        return orderDao.getBooksOfOrder(id);
     }
 }

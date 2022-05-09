@@ -2,12 +2,12 @@ package com.bookstore.backend.dao.impl;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
 import com.bookstore.backend.dao.OrderDao;
 
+import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -23,9 +23,9 @@ public class OrderDaoImpl implements OrderDao {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public Integer createOrder(Integer userId, String name, String phone, String address, String note) {
+    public Integer createOrder(Integer userId, String name, String phone, String address, String note, Double price) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        String sql = "INSERT INTO orders (userId, name, phone, Address, note) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO orders (userId, name, phone, Address, note, price) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, userId);
@@ -33,6 +33,7 @@ public class OrderDaoImpl implements OrderDao {
             ps.setString(3, phone);
             ps.setString(4, address);
             ps.setString(5, note);
+            ps.setDouble(6, price);
             return ps;
         }, keyHolder);
         return Objects.requireNonNull(keyHolder.getKey()).intValue();
@@ -47,9 +48,12 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> getOrders(Integer userId) {
         String sql = "SELECT * FROM orders WHERE userId = " + userId;
-        List<Order> result = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Order.class));
-        System.out.println(result);
-        return result;
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Order.class));
     }
 
+    @Override
+    public List<Book> getBooksOfOrder(Integer id) {
+        String sql = "SELECT book.* FROM book, orderItem WHERE book.id = orderItem.bookId and orderItem.orderId = " + id;
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Book.class));
+    }
 }

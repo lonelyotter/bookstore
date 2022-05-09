@@ -12,6 +12,7 @@ export default function AllBooksView() {
   useEffect(() => {
     getBooks().then((data) => setBooks(data));
   }, []);
+
   return (
     <Content className={"content"}>
       <Row justify={"center"}>

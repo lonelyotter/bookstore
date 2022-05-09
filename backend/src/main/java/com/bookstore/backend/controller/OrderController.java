@@ -3,6 +3,7 @@ package com.bookstore.backend.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.security.auth.AuthUserDetail;
 import com.bookstore.backend.service.OrderService;
@@ -34,5 +35,10 @@ public class OrderController {
     public List<Order> getOrders() {
         AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return orderService.getOrders(user.getId());
+    }
+
+    @GetMapping("/order")
+    public List<Book> getOrderDetail(@RequestParam Integer id) {
+        return orderService.getOrderDetail(id);
     }
 }
