@@ -1,7 +1,6 @@
 import React from "react";
 import { Dropdown, Avatar, Image, Menu } from "antd";
 import {
-  UserOutlined,
   LogoutOutlined,
   ShoppingCartOutlined,
   FileTextOutlined,
@@ -24,23 +23,18 @@ export default function UserAvatar({ user, setUser }) {
           <span>我的订单</span>
         </Link>
       </Menu.Item>
-      <Menu.Item key={3} icon={<UserOutlined />}>
-        <a href={"#"}>
-          <span>个人中心</span>
-        </a>
-      </Menu.Item>
-      <Menu.Item key={4} icon={<EditOutlined />}>
+
+      <Menu.Item key={3} icon={<EditOutlined />}>
         <Link to={"/bookManage"}>
           <span>书籍管理</span>
         </Link>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key={5} icon={<LogoutOutlined />} danger>
+      <Menu.Item key={4} icon={<LogoutOutlined />} danger>
         <span
           onClick={() => {
-            setUser(null);
-
             logout();
+            setUser(null);
           }}
         >
           退出登录

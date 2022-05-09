@@ -7,7 +7,7 @@ export default function LoginForm({ user, setUser }) {
   const onFinish = ({ username, password }) => {
     login(username, password)
       .then(() => setUser(getUser()))
-      .catch((err) => message.error("用户名或密码错误"));
+      .catch(() => message.error("用户名或密码错误"));
   };
 
   return (
@@ -31,7 +31,7 @@ export default function LoginForm({ user, setUser }) {
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Username"
+          placeholder="username"
         />
       </Form.Item>
       <Form.Item
@@ -46,7 +46,7 @@ export default function LoginForm({ user, setUser }) {
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
-          placeholder="Password"
+          placeholder="password"
         />
       </Form.Item>
 
@@ -55,7 +55,7 @@ export default function LoginForm({ user, setUser }) {
           登录
         </Button>
         <div style={{ marginTop: "20px" }}>
-          Or <a href="">register now!</a>
+          Or <a href="#">register now!</a>
         </div>
       </Form.Item>
     </Form>

@@ -7,15 +7,12 @@ const instance = axios.create({
 
 // 登录并设置cookie
 export function login(username, password) {
-  return new Promise((resolve, reject) => {
-    instance
-      .get("/login", { auth: { username: username, password: password } })
-      .then((res) => {
-        Cookies.set("user", JSON.stringify(res.data));
-        resolve(res);
-      })
-      .catch((err) => reject(err.response.data));
-  });
+  return instance
+    .get("/login", { auth: { username: username, password: password } })
+    .then((res) => {
+      Cookies.set("user", JSON.stringify(res.data));
+    })
+    .catch((err) => err.response.data);
 }
 
 // 登出并删除cookie
