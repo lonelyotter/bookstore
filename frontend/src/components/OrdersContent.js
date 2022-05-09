@@ -1,63 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Divider, Row } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
 import { DatePicker, Table } from "antd";
 import Search from "antd/es/input/Search";
+import { getOrders } from "../services/api";
 
 const { RangePicker } = DatePicker;
 
 export default function OrdersContent() {
-  const [books, setBooks] = useState([
-    {
-      name: "深入理解计算机系统",
-      price: 65,
-      purchaseDate: new Date("December 17, 2017 03:24:00"),
-    },
-    {
-      name: "小王子",
-      price: 50,
-      purchaseDate: new Date("November 17, 2018 09:24:00"),
-    },
-    {
-      name: "机器学习",
-      price: 60,
-      purchaseDate: new Date("January 17, 2019 09:24:00"),
-    },
-    {
-      name: "老人与海",
-      price: 20,
-      purchaseDate: new Date("June 17, 2020 09:24:00"),
-    },
-    {
-      name: "动物农场",
-      price: 80,
-      purchaseDate: new Date("June 17, 2021 09:24:00"),
-    },
-  ]);
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    getOrders().then((orders) => {
+      let data = orders.map((order) => {
+        return {
+          orderId: order.id,
+          name: order.name,
+          address: order.address,
+          phone: order.phone,
+          price: 100,
+          purchaseDate: new Date(Date.parse(order.time)),
+          key: order.id,
+        };
+      });
+      setOrders(data);
+    });
+  }, []);
 
   const columns = [
     {
-      title: "书籍名称",
+      title: "订单编号",
+      dataIndex: "orderId",
+      key: "orderId",
+      sortDirections: ["ascend", "descend", "ascend"],
+      sorter: (a, b) => a.orderId - b.orderId,
+    },
+
+    {
+      title: "收货人",
       dataIndex: "name",
       key: "name",
     },
 
     {
-      title: "价格",
-      dataIndex: "price",
-      key: "price",
-      sortDirections: ["ascend", "descend"],
-      sorter: (a, b) => a.price - b.price,
+      title: "手机号",
+      dataIndex: "phone",
+      key: "phone",
     },
 
     {
       title: "购买时间",
       dataIndex: "purchaseDate",
       key: "purchaseDate",
+      defaultSortOrder: "descend",
       sortDirections: ["ascend", "descend"],
       render: (date) => date.toLocaleString(),
       sorter: (a, b) => a.purchaseDate - b.purchaseDate,
-      defaultSortOrder: "descend",
+    },
+    {
+      title: "收货地址",
+      dataIndex: "address",
+      key: "address",
+    },
+    {
+      title: "价格",
+      dataIndex: "price",
+      key: "price",
+      sorter: (a, b) => a.price - b.price,
     },
   ];
 
@@ -93,20 +102,20 @@ export default function OrdersContent() {
             }}
           />
 
-          <Search
-            placeholder="输入书名"
-            allowClear
-            style={{ width: 300 }}
-            onSearch={(v) => setSearchText(v.toLowerCase())}
-          />
+          {/*<Search*/}
+          {/*  placeholder="输入书名"*/}
+          {/*  allowClear*/}
+          {/*  style={{ width: 300 }}*/}
+          {/*  onSearch={(v) => setSearchText(v.toLowerCase())}*/}
+          {/*/>*/}
         </Col>
 
         {/*orders table*/}
         <Col span={24} style={{ marginTop: "10px" }}>
           <Table
-            dataSource={books.filter(
+            dataSource={orders.filter(
               (book) =>
-                book.name.toLowerCase().includes(searchText) &&
+                // book.name.toLowerCase().includes(searchText) &&
                 dateRange[0] < book.purchaseDate &&
                 dateRange[1] > book.purchaseDate
             )}

@@ -76,3 +76,11 @@ export function checkout(order) {
     .then((res) => res.data)
     .catch((err) => err);
 }
+
+export function getOrders() {
+  const { username, password } = getUser();
+  return instance
+    .get("/orders", { auth: { username: username, password: password } })
+    .then((res) => res.data)
+    .catch((err) => err);
+}

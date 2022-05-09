@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Divider, Form, Input } from "antd";
+import { Button, Divider, Form, Input, message } from "antd";
 import { FormOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { checkout, deleteCartItem, getCartItems } from "../services/api";
 import CartCard from "./CartCard";
@@ -28,7 +28,9 @@ export default function CartContent() {
   };
 
   const onFinish = (values) => {
-    checkout(values).then((r) => updateCart());
+    checkout(values)
+      .then((r) => message.info(r))
+      .then(() => updateCart());
   };
 
   const validateMessages = {
