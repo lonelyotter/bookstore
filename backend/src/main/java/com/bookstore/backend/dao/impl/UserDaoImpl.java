@@ -24,11 +24,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> getUser(String username) {
+    public User getUser(String username) {
         String sql = "SELECT * FROM user WHERE username='" + username + "'";
         List<User> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
-        if (list.isEmpty())
-            return Optional.empty();
-        return Optional.of(list.get(0));
+        if (list.size() > 0) {
+            return list.get(0);
+        } else {
+            return null;
+        }
     }
 }

@@ -6,8 +6,7 @@ import { addCartItem, getBook } from "../services/api";
 import { useParams } from "react-router-dom";
 
 export default function BookDetail() {
-  let { bookId } = useParams();
-  const userId = 1;
+  const { bookId } = useParams();
 
   const [book, setBook] = useState({});
   useEffect(() => {
@@ -71,7 +70,7 @@ export default function BookDetail() {
           type="danger"
           icon={<ShoppingCartOutlined />}
           size={"large"}
-          onClick={() => addCartItem(userId, bookId)}
+          onClick={() => addCartItem(bookId)}
         >
           加入购物车
         </Button>

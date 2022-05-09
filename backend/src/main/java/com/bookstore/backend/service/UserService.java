@@ -7,5 +7,5 @@ import com.bookstore.backend.entity.User;
 public interface UserService {
     void register(String username, String password, String email);
 
-    Optional<User> getUser(String username);
+    User getUser(String username);
 }

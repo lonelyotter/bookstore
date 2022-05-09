@@ -1,36 +1,39 @@
-import React, { useContext, createContext, useState } from "react";
-import { login as realLogin } from "./api";
+import axios from "axios";
 import Cookies from "js-cookie";
 
-const AuthContext = createContext();
+const instance = axios.create({
+  baseURL: "http://localhost:8080/api",
+});
 
-export function ProvideAuth({ children }) {
-  const auth = useProvideAuth();
-  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
+export function login(username, password) {
+  return new Promise((resolve, reject) => {
+    instance
+      .get("/login", { auth: { username: username, password: password } })
+      .then((res) => {
+        Cookies.set("user", JSON.stringify(res.data));
+        resolve(res);
+      })
+      .catch((err) => reject(err.response.data));
+  });
 }
 
-export function useAuth() {
-  return useContext(AuthContext);
+export function logout() {
+  return new Promise((resolve, reject) => {
+    instance
+      .post("/logout")
+      .then((res) => {
+        Cookies.remove("user");
+        resolve(res.data);
+      })
+      .catch((err) => reject(err));
+  });
 }
 
-function useProvideAuth() {
-  const [isLogin, setIsLogin] = useState(Cookies.get("isLogin") === "true");
-
-  const login = (username, password) => {
-    return realLogin(username, password).then((res) => {
-      setIsLogin(true);
-      Cookies.set("isLogin", "true");
-      Cookies.set("username", username);
-      Cookies.set("password", password);
-    });
-  };
-
-  const logout = () => {
-    setIsLogin(false);
-    Cookies.remove("isLogin");
-    Cookies.remove("username");
-    Cookies.remove("password");
-  };
-
-  return { isLogin, login, logout };
+export function getUser() {
+  let userStr = Cookies.get("user");
+  if (userStr) {
+    return JSON.parse(userStr);
+  } else {
+    return null;
+  }
 }

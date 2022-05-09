@@ -17,12 +17,12 @@ public class AuthUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        java.util.Optional<User> user = userDao.getUser(username);
+        User user = userDao.getUser(username);
 
-        if (!user.isPresent()) {
+        if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         } else {
-            return AuthUserFactory.create(user.get());
+            return AuthUserFactory.create(user);
         }
     }
 }

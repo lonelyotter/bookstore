@@ -1,16 +1,15 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { useAuth } from "../services/auth";
+import { login } from "../services/auth";
 
 export default function LoginForm() {
-  const auth = useAuth();
   const onFinish = ({ username, password }) => {
-    console.log(username, password);
-    auth
-      .login(username, password)
-      .catch((err) => window.alert("wrong username or password"));
+    login(username, password).catch((err) =>
+      window.alert("wrong username or password")
+    );
   };
+
   return (
     <Form
       name="normal_login"
