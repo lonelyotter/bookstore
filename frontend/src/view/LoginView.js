@@ -12,7 +12,7 @@ export default function LoginView(props) {
   return (
     <div className={"login-page"}>
       <div className={"form-container"}>
-        <LoginForm />
+        <LoginForm user={props.user} setUser={props.setUser} />
       </div>
     </div>
   );

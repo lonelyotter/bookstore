@@ -1,12 +1,13 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { getUser } from "./auth";
 
 const instance = axios.create({
   baseURL: "http://localhost:8080/api",
 });
 
+const { id: userId, username, password } = getUser();
+
 export function getBooks() {
-  const { id: userId, username, password } = JSON.parse(Cookies.get("user"));
   return new Promise((resolve, reject) => {
     instance
       .get("/books", {
@@ -18,7 +19,6 @@ export function getBooks() {
 }
 
 export function getBook(id) {
-  const { id: userId, username, password } = JSON.parse(Cookies.get("user"));
   return new Promise((resolve, reject) => {
     instance
       .get("/book/" + id, {
@@ -30,7 +30,6 @@ export function getBook(id) {
 }
 
 export function getCartItems() {
-  const { id: userId, username, password } = JSON.parse(Cookies.get("user"));
   return new Promise((resolve, reject) => {
     instance
       .get("/cart", {
@@ -43,7 +42,6 @@ export function getCartItems() {
 }
 
 export function deleteCartItem(cartItemId) {
-  const { id: userId, username, password } = JSON.parse(Cookies.get("user"));
   return new Promise((resolve, reject) => {
     instance({
       method: "DELETE",
@@ -57,8 +55,6 @@ export function deleteCartItem(cartItemId) {
 }
 
 export function addCartItem(bookId) {
-  console.log(bookId);
-  const { id: userId, username, password } = JSON.parse(Cookies.get("user"));
   return new Promise((resolve, reject) => {
     instance({
       method: "POST",

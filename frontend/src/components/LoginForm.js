@@ -1,13 +1,13 @@
 import React from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { login } from "../services/auth";
+import { getUser, login } from "../services/auth";
 
-export default function LoginForm() {
+export default function LoginForm({ setUser }) {
   const onFinish = ({ username, password }) => {
-    login(username, password).catch((err) =>
-      window.alert("wrong username or password")
-    );
+    login(username, password)
+      .then(() => setUser(getUser()))
+      .catch((err) => message.error("用户名或密码错误"));
   };
 
   return (

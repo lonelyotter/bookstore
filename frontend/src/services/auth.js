@@ -5,6 +5,7 @@ const instance = axios.create({
   baseURL: "http://localhost:8080/api",
 });
 
+// 登录并设置cookie
 export function login(username, password) {
   return new Promise((resolve, reject) => {
     instance
@@ -17,6 +18,7 @@ export function login(username, password) {
   });
 }
 
+// 登出并删除cookie
 export function logout() {
   return new Promise((resolve, reject) => {
     instance
@@ -29,6 +31,7 @@ export function logout() {
   });
 }
 
+// 从cookie中取出用户信息，若不存在返回null
 export function getUser() {
   let userStr = Cookies.get("user");
   if (userStr) {

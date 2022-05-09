@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Descriptions, Button, Image, Row, Col } from "antd";
+import { Descriptions, Button, Image, Row, Col, message } from "antd";
 import "../css/BookDetail.css";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { addCartItem, getBook } from "../services/api";
@@ -70,7 +70,9 @@ export default function BookDetail() {
           type="danger"
           icon={<ShoppingCartOutlined />}
           size={"large"}
-          onClick={() => addCartItem(bookId)}
+          onClick={() =>
+            addCartItem(bookId).then(() => message.success("书籍已加入购物车"))
+          }
         >
           加入购物车
         </Button>

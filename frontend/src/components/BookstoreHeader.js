@@ -9,7 +9,7 @@ import { SearchOutlined } from "@ant-design/icons";
 const { Header } = Layout;
 const { Search } = Input;
 
-function BookstoreHeader() {
+function BookstoreHeader(props) {
   const user = { name: "Haochen Song", avatar: avatar };
 
   return (
