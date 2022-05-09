@@ -5,9 +5,9 @@ const instance = axios.create({
   baseURL: "http://localhost:8080/api",
 });
 
-const { id: userId, username, password } = getUser();
-
 export function getBooks() {
+  const { id: userId, username, password } = getUser();
+
   return new Promise((resolve, reject) => {
     instance
       .get("/books", {
@@ -19,6 +19,8 @@ export function getBooks() {
 }
 
 export function getBook(id) {
+  const { id: userId, username, password } = getUser();
+
   return new Promise((resolve, reject) => {
     instance
       .get("/book/" + id, {
@@ -30,6 +32,8 @@ export function getBook(id) {
 }
 
 export function getCartItems() {
+  const { id: userId, username, password } = getUser();
+
   return new Promise((resolve, reject) => {
     instance
       .get("/cart", {
@@ -42,6 +46,8 @@ export function getCartItems() {
 }
 
 export function deleteCartItem(cartItemId) {
+  const { id: userId, username, password } = getUser();
+
   return new Promise((resolve, reject) => {
     instance({
       method: "DELETE",
@@ -55,6 +61,8 @@ export function deleteCartItem(cartItemId) {
 }
 
 export function addCartItem(bookId) {
+  const { id: userId, username, password } = getUser();
+
   return new Promise((resolve, reject) => {
     instance({
       method: "POST",
@@ -65,6 +73,20 @@ export function addCartItem(bookId) {
       .then((res) => {
         resolve(res);
       })
+      .catch((err) => reject(err));
+  });
+}
+
+export function checkout(order) {
+  const { id: userId, username, password } = getUser();
+  return new Promise((resolve, reject) => {
+    instance({
+      method: "POST",
+      url: "/order",
+      auth: { username, password },
+      data: { userId: userId, ...order },
+    })
+      .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
 }

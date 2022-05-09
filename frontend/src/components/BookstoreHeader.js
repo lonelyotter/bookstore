@@ -1,16 +1,17 @@
 import React from "react";
 import { Layout, Row, Col, Menu, Input, Popover } from "antd";
-import avatar from "../assets/avatar.jpg";
 import logo from "../assets/logo.svg";
 import UserAvatar from "./UserAvatar";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SearchOutlined } from "@ant-design/icons";
 
 const { Header } = Layout;
 const { Search } = Input;
 
-function BookstoreHeader(props) {
-  const user = { name: "Haochen Song", avatar: avatar };
+export default function BookstoreHeader({ user, setUser }) {
+  if (user === null) {
+    return null;
+  }
 
   return (
     <Header className={"header"}>
@@ -83,11 +84,9 @@ function BookstoreHeader(props) {
         </Col>
         {/*user*/}
         <Col style={{ marginLeft: "10px" }}>
-          <UserAvatar user={user} />
+          <UserAvatar user={user} setUser={setUser} />
         </Col>
       </Row>
     </Header>
   );
 }
-
-export default withRouter(BookstoreHeader);

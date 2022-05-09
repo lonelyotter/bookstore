@@ -35,8 +35,6 @@ public class UserController {
     public User login() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        User user = userService.getUser(username);
-        System.out.println(user);
-        return user;
+        return userService.getUser(username);
     }
 }

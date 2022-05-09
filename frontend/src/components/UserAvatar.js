@@ -8,50 +8,54 @@ import {
   EditOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { logout } from "../services/auth";
+import defaultAvatar from "../assets/avatar.jpg";
 
-export default class UserAvatar extends React.Component {
-  render() {
-    const menu = (
-      <Menu>
-        <Menu.Item key={1} icon={<ShoppingCartOutlined />}>
-          <Link to={"/cart"}>
-            <span>我的购物车</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key={2} icon={<FileTextOutlined />}>
-          <Link to={"/orders"}>
-            <span>我的订单</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key={3} icon={<UserOutlined />}>
-          <a href={"#"}>
-            <span>个人中心</span>
-          </a>
-        </Menu.Item>
-        <Menu.Item key={4} icon={<EditOutlined />}>
-          <Link to={"/bookManage"}>
-            <span>书籍管理</span>
-          </Link>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key={5} icon={<LogoutOutlined />} danger>
-          <a href={"#"}>
-            <span>退出登录</span>
-          </a>
-        </Menu.Item>
-      </Menu>
-    );
-    return (
-      <div id={"avatar"}>
-        <Dropdown overlay={menu} placement="bottomRight">
-          <div style={{ cursor: "pointer", whiteSpace: "nowrap" }}>
-            <Avatar
-              src={<Image src={this.props.user.avatar} preview={false} />}
-            />
-            <span style={{ marginLeft: 8 }}>{this.props.user.name}</span>
-          </div>
-        </Dropdown>
-      </div>
-    );
-  }
+export default function UserAvatar({ user, setUser }) {
+  const menu = (
+    <Menu>
+      <Menu.Item key={1} icon={<ShoppingCartOutlined />}>
+        <Link to={"/cart"}>
+          <span>我的购物车</span>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key={2} icon={<FileTextOutlined />}>
+        <Link to={"/orders"}>
+          <span>我的订单</span>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key={3} icon={<UserOutlined />}>
+        <a href={"#"}>
+          <span>个人中心</span>
+        </a>
+      </Menu.Item>
+      <Menu.Item key={4} icon={<EditOutlined />}>
+        <Link to={"/bookManage"}>
+          <span>书籍管理</span>
+        </Link>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key={5} icon={<LogoutOutlined />} danger>
+        <span
+          onClick={() => {
+            setUser(null);
+
+            logout();
+          }}
+        >
+          退出登录
+        </span>
+      </Menu.Item>
+    </Menu>
+  );
+  return (
+    <div id={"avatar"}>
+      <Dropdown overlay={menu} placement="bottomRight">
+        <div style={{ cursor: "pointer", whiteSpace: "nowrap" }}>
+          <Avatar src={<Image src={defaultAvatar} preview={false} />} />
+          <span style={{ marginLeft: 8 }}>{user.username}</span>
+        </div>
+      </Dropdown>
+    </div>
+  );
 }

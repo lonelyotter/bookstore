@@ -20,15 +20,7 @@ export function login(username, password) {
 
 // 登出并删除cookie
 export function logout() {
-  return new Promise((resolve, reject) => {
-    instance
-      .post("/logout")
-      .then((res) => {
-        Cookies.remove("user");
-        resolve(res.data);
-      })
-      .catch((err) => reject(err));
-  });
+  Cookies.remove("user");
 }
 
 // 从cookie中取出用户信息，若不存在返回null

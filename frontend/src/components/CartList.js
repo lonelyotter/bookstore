@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CartCard from "./CartCard";
 import { deleteCartItem, getCartItems } from "../services/api";
+import { getUser } from "../services/auth";
 
 export default function CartList() {
-  const userId = 1;
+  const { id: userId } = getUser();
 
   const [cartItems, setCartItems] = useState([]);
 
