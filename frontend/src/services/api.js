@@ -69,7 +69,7 @@ export function checkout(order) {
   const { id: userId, username, password } = getUser();
   return instance({
     method: "POST",
-    url: "/order",
+    url: "/checkout",
     auth: { username, password },
     data: { userId: userId, ...order },
   })

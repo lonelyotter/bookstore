@@ -1,7 +1,9 @@
 package com.bookstore.backend.entity;
 
-
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 @Data
 public class Order {
@@ -11,4 +13,5 @@ public class Order {
     private String phone;
     private String address;
     private String note;
+    private ArrayList<Integer> books;
 }

@@ -30,15 +30,16 @@ export default function UserAvatar({ user, setUser }) {
         </Link>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key={4} icon={<LogoutOutlined />} danger>
-        <span
-          onClick={() => {
-            logout();
-            setUser(null);
-          }}
-        >
-          退出登录
-        </span>
+      <Menu.Item
+        onClick={() => {
+          logout();
+          setUser(null);
+        }}
+        key={4}
+        icon={<LogoutOutlined />}
+        danger
+      >
+        <span>退出登录</span>
       </Menu.Item>
     </Menu>
   );
