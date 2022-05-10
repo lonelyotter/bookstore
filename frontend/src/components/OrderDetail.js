@@ -27,11 +27,18 @@ export default function OrderDetail() {
       key: "author",
     },
     {
-      title: "价格",
+      title: "单价",
       dataIndex: "price",
       key: "price",
       sortDirections: ["ascend", "descend", "ascend"],
       sorter: (a, b) => a.price - b.price,
+    },
+    {
+      title: "数量",
+      dataIndex: "nums",
+      key: "nums",
+      sortDirections: ["ascend", "descend", "ascend"],
+      sorter: (a, b) => a.nums - b.nums,
     },
   ];
 

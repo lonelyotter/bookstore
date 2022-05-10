@@ -2,6 +2,7 @@ package com.bookstore.backend.service;
 
 import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.Order;
+import com.bookstore.backend.entity.OrderItem;
 
 import java.util.List;
 
@@ -10,5 +11,5 @@ public interface OrderService {
 
     List<Order> getOrders(Integer userId);
 
-    List<Book> getOrderDetail(Integer id);
+    List<OrderItem> getOrderDetail(Integer id);
 }

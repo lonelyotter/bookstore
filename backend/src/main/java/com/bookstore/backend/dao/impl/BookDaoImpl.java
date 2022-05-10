@@ -32,4 +32,10 @@ public class BookDaoImpl implements BookDao {
             return null;
         }
     }
+
+    @Override
+    public void updateInventory(Integer id, Integer inventory) {
+        String sql = "UPDATE book SET inventory = ? WHERE id = ?";
+        jdbcTemplate.update(sql, inventory, id);
+    }
 }

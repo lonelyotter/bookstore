@@ -64,7 +64,7 @@ export default function OrdersContent() {
       key: "address",
     },
     {
-      title: "价格",
+      title: "总价",
       dataIndex: "price",
       key: "price",
       sorter: (a, b) => a.price - b.price,
@@ -111,7 +111,6 @@ export default function OrdersContent() {
                 setDateRange(range);
               }
             }}
-            renderExtraFooter={() => "extra footer"}
             showTime
           />
 

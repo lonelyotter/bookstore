@@ -6,5 +6,8 @@ import java.util.List;
 
 public interface BookDao {
     List<Book> getBooks();
+
     Book getBook(Integer id);
+
+    void updateInventory(Integer id, Integer inventory);
 }

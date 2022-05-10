@@ -5,6 +5,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Objects;
 
+import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.OrderDao;
 
 import com.bookstore.backend.entity.Book;
@@ -15,12 +16,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import com.bookstore.backend.entity.OrderItem;
+
 
 @Repository
 public class OrderDaoImpl implements OrderDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    BookDao bookDao;
 
     @Override
     public Integer createOrder(Integer userId, String name, String phone, String address, String note, Double price) {
@@ -40,9 +46,10 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void addBookForOrder(Integer orderId, Integer bookId) {
-        String sql = "INSERT INTO orderItem (orderId, bookId) VALUES(?, ?)";
-        jdbcTemplate.update(sql, orderId, bookId);
+    public void addBookForOrder(Integer orderId, Integer bookId, Integer nums) {
+        Book book = bookDao.getBook(bookId);
+        String sql = "INSERT INTO orderItem (orderId, bookId, price, author, nums, isbn, name) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, orderId, bookId, book.getPrice(), book.getAuthor(), nums, book.getISBN(), book.getName());
     }
 
     @Override
@@ -52,8 +59,10 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Book> getBooksOfOrder(Integer id) {
-        String sql = "SELECT book.* FROM book, orderItem WHERE book.id = orderItem.bookId and orderItem.orderId = " + id;
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Book.class));
+    public List<OrderItem> getItemsOfOrder(Integer id) {
+        String sql = "SELECT * FROM orderItem WHERE orderId = " + id;
+        List<OrderItem> temp = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderItem.class));
+        System.out.println(temp);
+        return temp;
     }
 }
