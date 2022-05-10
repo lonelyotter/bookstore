@@ -13,6 +13,7 @@ export default function BookDetail() {
     getBook(bookId).then((data) => setBook(data));
   }, []);
 
+  if (!book) return <div>书籍不存在</div>;
   return (
     <div>
       <div className={"book-detail"}>

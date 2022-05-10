@@ -1,6 +1,5 @@
 import React from "react";
-import { DeleteOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Image, Row } from "antd";
+import { Button, Card, Col, Image, Row, Space } from "antd";
 
 export default function CartCard(props) {
   return (
@@ -22,17 +21,31 @@ export default function CartCard(props) {
             >
               <h2>{props.bookInfo.name}</h2>
               <h3 style={{ color: "red" }}>¥{props.bookInfo.price}</h3>
+              <h3>数量 {props.bookInfo.nums}</h3>
             </div>
           </Col>
           <Col>
-            <Button
-              type={"primary"}
-              danger
-              icon={<DeleteOutlined />}
-              onClick={() => props.removeItem(props.bookInfo.id)}
-            >
-              移除
-            </Button>
+            <Row>
+              {" "}
+              <Button
+                type="primary"
+                block
+                onClick={() => props.addItem(props.bookInfo.bookId)}
+              >
+                +
+              </Button>
+            </Row>
+            <Space />
+            <Row>
+              <Button
+                type={"primary"}
+                danger
+                block
+                onClick={() => props.removeItem(props.bookInfo.id)}
+              >
+                -
+              </Button>
+            </Row>
           </Col>
         </Row>
       </Card>

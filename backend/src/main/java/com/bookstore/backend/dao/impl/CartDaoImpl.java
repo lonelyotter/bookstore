@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CartDaoImpl implements CartDao {
@@ -18,20 +19,41 @@ public class CartDaoImpl implements CartDao {
 
     @Override
     public List<CartItem> getCartItems(Integer userId) {
-        String sql = "SELECT cart.id as id, cart.bookId as bookId, book.name as name, book.price as price, book.image as image FROM cart, book WHERE cart.userId = " + userId + " and cart.bookId = book.id";
+        String sql = "SELECT cart.id as id, cart.bookId as bookId, book.name as name, book.price as price, book.image as image, cart.nums as nums FROM cart, book WHERE cart.userId = " + userId + " and cart.bookId = book.id";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItem.class));
     }
 
     @Override
     public void deleteCartItem(Integer id) {
-        jdbcTemplate.update("DELETE FROM cart where id = " + id);
+        String sql = "SELECT nums FROM cart WHERE id = ?";
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, id);
+        if (result.size() > 0) {
+            Integer nums = (Integer) result.get(0).get("nums");
+            if (nums > 1) {
+                sql = "UPDATE cart SET nums = ? where id = ?";
+                jdbcTemplate.update(sql, nums - 1, id);
+            } else {
+                sql = "DELETE FROM cart WHERE id = ?";
+                jdbcTemplate.update(sql, id);
+            }
+        }
     }
 
     @Override
     public void addCartItem(Integer userId, Integer bookId) {
-        String sql = "INSERT INTO cart (userId, bookId) VALUES(?, ?)";
-        jdbcTemplate.update(sql, userId, bookId);
-
+        System.out.println(userId);
+        System.out.println(bookId);
+        String sql = "SELECT id, nums FROM cart WHERE userId = ? and bookId = ?";
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, userId, bookId);
+        if (result.size() > 0) {
+            Integer id = (Integer) result.get(0).get("id");
+            Integer nums = (Integer) result.get(0).get("nums");
+            sql = "UPDATE cart SET nums = ? where id = ?";
+            jdbcTemplate.update(sql, nums + 1, id);
+        } else {
+            sql = "INSERT INTO cart(userId, bookId, nums) VALUE(?, ?, ?) ";
+            jdbcTemplate.update(sql, userId, bookId, 1);
+        }
     }
 
     @Override

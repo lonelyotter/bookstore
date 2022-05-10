@@ -28,11 +28,10 @@ export function getBook(id) {
 }
 
 export function getCartItems() {
-  const { id: userId, username, password } = getUser();
+  const { username, password } = getUser();
 
   return instance
     .get("/cart", {
-      params: { userId: userId },
       auth: { username: username, password: password },
     })
     .then((res) => res.data)
@@ -53,13 +52,13 @@ export function deleteCartItem(cartItemId) {
 }
 
 export function addCartItem(bookId) {
-  const { id: userId, username, password } = getUser();
+  const { username, password } = getUser();
 
   return instance({
     method: "POST",
     url: "/cart",
     auth: { username, password },
-    data: { userId: userId, bookId: bookId },
+    data: { bookId: bookId },
   })
     .then((res) => res.data)
     .catch((err) => err);

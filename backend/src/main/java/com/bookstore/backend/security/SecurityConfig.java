@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 // allow preflight
                 .authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll().and()
+
                 // private request
                 .authorizeRequests().anyRequest().authenticated().and()
                 // basic auth

@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, Divider, Form, Input, message } from "antd";
 import { FormOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { checkout, deleteCartItem, getCartItems } from "../services/api";
+import {
+  addCartItem,
+  checkout,
+  deleteCartItem,
+  getCartItems,
+} from "../services/api";
 import CartCard from "./CartCard";
 
 export default function CartContent() {
@@ -16,6 +21,10 @@ export default function CartContent() {
 
   const removeItem = (id) => {
     deleteCartItem(id).then(updateCart);
+  };
+
+  const addItem = (bookId) => {
+    addCartItem(bookId).then(updateCart);
   };
 
   const layout = {
@@ -56,6 +65,7 @@ export default function CartContent() {
             <CartCard
               bookInfo={cartItem}
               removeItem={removeItem}
+              addItem={addItem}
               key={cartItem.id}
             />
           ))}

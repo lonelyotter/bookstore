@@ -23,8 +23,13 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public Book getBook(Integer id) {
-        return jdbcTemplate.query(
+        List<Book> book = jdbcTemplate.query(
                 "SELECT * FROM book WHERE id = " + id.toString(),
-                new BeanPropertyRowMapper<>(Book.class)).get(0);
+                new BeanPropertyRowMapper<>(Book.class));
+        if (book.size() > 0) {
+            return book.get(0);
+        } else {
+            return null;
+        }
     }
 }
