@@ -32,18 +32,18 @@ public class OrderServiceImpl implements OrderService {
             return "购物车没有商品";
 
         // 判断是否有商品库存不足并同时计算订单总价
-        Double totalPrice = 0.0;
+        double totalPrice = 0.0;
         for (CartItem item : items) {
-            Integer inventory = bookDao.getBook(item.getBookId()).getInventory();
+            int inventory = bookDao.getBook(item.getBookId()).getInventory();
             if (inventory < item.getNums()) {
                 return item.getName() + "库存不足，仅剩" + inventory + "本";
             }
-            totalPrice += item.getPrice();
+            totalPrice += item.getPrice() * item.getNums();
         }
 
         // 更新商品库存
         for (CartItem item : items) {
-            Integer inventory = bookDao.getBook(item.getBookId()).getInventory();
+            int inventory = bookDao.getBook(item.getBookId()).getInventory();
             bookDao.updateInventory(item.getBookId(), inventory - item.getNums());
         }
 
