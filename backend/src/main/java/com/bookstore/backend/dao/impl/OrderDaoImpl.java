@@ -61,8 +61,6 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<OrderItem> getItemsOfOrder(Integer id) {
         String sql = "SELECT * FROM orderItem WHERE orderId = " + id;
-        List<OrderItem> temp = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderItem.class));
-        System.out.println(temp);
-        return temp;
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderItem.class));
     }
 }
