@@ -2,13 +2,15 @@ import React from "react";
 import { Layout, Row, Col, Menu, Input, Popover } from "antd";
 import logo from "../assets/logo.svg";
 import UserAvatar from "./UserAvatar";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { SearchOutlined } from "@ant-design/icons";
 
 const { Header } = Layout;
 const { Search } = Input;
 
 export default function BookstoreHeader({ user, setUser }) {
+  let history = useHistory();
+
   if (user === null) {
     return null;
   }
@@ -57,11 +59,9 @@ export default function BookstoreHeader({ user, setUser }) {
             allowClear
             enterButton
             style={{ marginTop: 8 }}
-            onSearch={(query) =>
-              this.props.history.push(
-                "/search?query=" + encodeURIComponent(query)
-              )
-            }
+            onSearch={(query) => {
+              history.push("/search?query=" + encodeURIComponent(query));
+            }}
           />
         </Col>
         <Col xs={1} md={0}>
@@ -71,9 +71,7 @@ export default function BookstoreHeader({ user, setUser }) {
                 placeholder="search"
                 enterButton
                 onSearch={(query) =>
-                  this.props.history.push(
-                    "/search?query=" + encodeURIComponent(query)
-                  )
+                  history.push("/search?query=" + encodeURIComponent(query))
                 }
               />
             }

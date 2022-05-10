@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Content } from "antd/es/layout/layout";
 import { Col, Row } from "antd";
 import BookList from "../components/BookList";
 import { useLocation } from "react-router-dom";
+import { getBooks } from "../services/api";
 
 function useQuery() {
   const { search } = useLocation();
@@ -10,7 +11,10 @@ function useQuery() {
 }
 
 export default function SearchView() {
-  const books = require("../assets/books.json");
+  const [books, setBooks] = useState([]);
+  useEffect(() => {
+    getBooks().then((data) => setBooks(data));
+  }, []);
   let query = useQuery();
   let searchString = query.get("query");
   const filteredBooks = books.filter(
