@@ -111,6 +111,8 @@ export default function OrdersContent() {
                 setDateRange(range);
               }
             }}
+            renderExtraFooter={() => "extra footer"}
+            showTime
           />
 
           {/*<Search*/}

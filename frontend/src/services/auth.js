@@ -11,8 +11,7 @@ export function login(username, password) {
     .get("/login", { auth: { username: username, password: password } })
     .then((res) => {
       Cookies.set("user", JSON.stringify(res.data));
-    })
-    .catch((err) => err);
+    });
 }
 
 // 登出并删除cookie
