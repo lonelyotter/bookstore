@@ -24,11 +24,15 @@ export default function UserAvatar({ user, setUser }) {
         </Link>
       </Menu.Item>
 
-      <Menu.Item key={3} icon={<EditOutlined />}>
-        <Link to={"/bookManage"}>
-          <span>书籍管理</span>
-        </Link>
-      </Menu.Item>
+      {user.isAdmin === 1 && (
+        <>
+          <Menu.Item icon={<EditOutlined />} key={3}>
+            <Link to={"/bookManage"}>
+              <span>书籍管理</span>
+            </Link>
+          </Menu.Item>
+        </>
+      )}
       <Menu.Divider />
       <Menu.Item
         onClick={() => {
