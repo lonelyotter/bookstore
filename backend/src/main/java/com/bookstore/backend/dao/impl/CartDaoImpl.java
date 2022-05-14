@@ -13,7 +13,6 @@ import java.util.Map;
 @Repository
 public class CartDaoImpl implements CartDao {
 
-    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
     JdbcTemplate jdbcTemplate;
 

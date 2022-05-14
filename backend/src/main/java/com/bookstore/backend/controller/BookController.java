@@ -11,7 +11,6 @@ import java.util.List;
 @RequestMapping("/api")
 public class BookController {
 
-    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
     BookService bookService;
 
