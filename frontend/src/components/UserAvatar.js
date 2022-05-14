@@ -36,8 +36,7 @@ export default function UserAvatar({ user, setUser }) {
       <Menu.Divider />
       <Menu.Item
         onClick={() => {
-          logout();
-          setUser(null);
+          logout().then(() => setUser(null));
         }}
         key={4}
         icon={<LogoutOutlined />}

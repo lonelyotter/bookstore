@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
+@RequestMapping("/api")
 public class BookController {
 
     @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
     BookService bookService;
 
-    @GetMapping("/api/books")
+    @GetMapping("/books")
     public List<Book> getBooks() {
         return bookService.getBooks();
     }
 
-    @GetMapping("/api/book/{id}")
+    @GetMapping("/book/{id}")
     public Book getBook(@PathVariable Integer id) {
         return bookService.getBook(id);
     }

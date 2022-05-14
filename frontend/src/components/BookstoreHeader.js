@@ -55,7 +55,7 @@ export default function BookstoreHeader({ user, setUser }) {
         {/*search*/}
         <Col xs={0} md={8} lg={10}>
           <Search
-            placeholder="搜索书籍或作者"
+            placeholder="搜索书名"
             allowClear
             enterButton
             style={{ marginTop: 8 }}

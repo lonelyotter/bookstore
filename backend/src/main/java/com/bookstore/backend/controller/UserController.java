@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api")
 public class UserController {
 
@@ -29,12 +28,5 @@ public class UserController {
         String password = body.get("password");
         String email = body.get("email");
         userService.register(username, password, email);
-    }
-
-    @GetMapping("/login")
-    public User login() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        return userService.getUser(username);
     }
 }

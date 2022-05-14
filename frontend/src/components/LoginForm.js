@@ -7,7 +7,7 @@ export default function LoginForm({ user, setUser }) {
   const onFinish = ({ username, password }) => {
     login(username, password)
       .then(() => setUser(getUser()))
-      .catch((err) => message.error("用户名或密码错误"));
+      .catch((err) => message.error(err.response.data));
   };
 
   return (
