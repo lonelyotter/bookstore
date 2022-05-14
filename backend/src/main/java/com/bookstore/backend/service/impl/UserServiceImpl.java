@@ -16,8 +16,13 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public void register(String username, String password, String email) {
-        userDao.register(username, password, email);
+    public String register(String username, String password, String email) {
+        if (userDao.isUserExist(username)) {
+            return "Username already exists";
+        } else {
+            userDao.register(username, password, email);
+            return "Success";
+        }
     }
 
     @Override

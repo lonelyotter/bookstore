@@ -3,6 +3,7 @@ package com.bookstore.backend.dao.impl;
 import java.util.List;
 
 import com.bookstore.backend.dao.UserDao;
+import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.entity.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,14 @@ public class UserDaoImpl implements UserDao {
     public void register(String username, String password, String email) {
         String sql = "INSERT INTO user(username, password, email, isAdmin, isEnabled) VALUES ('" + username + "', '" + password + "', '" + email + "', " + 0 + ", " + 1 + ")";
         jdbcTemplate.update(sql);
+    }
+
+
+    @Override
+    public boolean isUserExist(String username) {
+        String sql = "SELECT * FROM user WHERE username = " + username;
+        List<User> user = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
+        return user.size() > 0;
     }
 
     @Override

@@ -23,10 +23,10 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/register")
-    public void register(@RequestBody Map<String, String> body) {
+    public String register(@RequestBody Map<String, String> body) {
         String username = body.get("username");
         String password = body.get("password");
         String email = body.get("email");
-        userService.register(username, password, email);
+        return userService.register(username, password, email);
     }
 }
