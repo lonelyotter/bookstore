@@ -40,8 +40,6 @@ public class CartDaoImpl implements CartDao {
 
     @Override
     public void addCartItem(Integer userId, Integer bookId) {
-        System.out.println(userId);
-        System.out.println(bookId);
         String sql = "SELECT id, nums FROM cart WHERE userId = ? and bookId = ?";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, userId, bookId);
         if (result.size() > 0) {
