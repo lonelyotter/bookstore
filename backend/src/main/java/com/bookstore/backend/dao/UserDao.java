@@ -1,7 +1,5 @@
 package com.bookstore.backend.dao;
 
-import java.util.Optional;
-
 import com.bookstore.backend.entity.User;
 
 public interface UserDao {
