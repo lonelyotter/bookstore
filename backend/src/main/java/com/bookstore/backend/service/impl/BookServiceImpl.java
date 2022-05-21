@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
 
-    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
     private BookDaoImpl bookDao;
 
@@ -21,8 +21,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getBook(Integer id)
-    {
+    public Book getBook(Integer id) {
         return bookDao.getBook(id);
     }
 }

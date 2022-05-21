@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.OrderDao;
@@ -49,7 +50,7 @@ public class OrderDaoImpl implements OrderDao {
     public void addBookForOrder(Integer orderId, Integer bookId, Integer nums) {
         Book book = bookDao.getBook(bookId);
         String sql = "INSERT INTO orderItem (orderId, bookId, price, author, nums, isbn, name) VALUES(?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, orderId, bookId, book.getPrice(), book.getAuthor(), nums, book.getISBN(), book.getName());
+        jdbcTemplate.update(sql, orderId, bookId, book.getPrice(), book.getAuthor(), nums, book.getIsbn(), book.getName());
     }
 
     @Override

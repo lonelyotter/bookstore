@@ -2,39 +2,37 @@ package com.bookstore.backend.dao.impl;
 
 import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.entity.Book;
+import com.bookstore.backend.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class BookDaoImpl implements BookDao {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    BookRepository bookRepository;
 
     @Override
     public List<Book> getBooks() {
-        return jdbcTemplate.query("SELECT * FROM book", new BeanPropertyRowMapper<>(Book.class));
+        return bookRepository.findAll();
     }
 
     @Override
     public Book getBook(Integer id) {
-        List<Book> book = jdbcTemplate.query(
-                "SELECT * FROM book WHERE id = " + id.toString(),
-                new BeanPropertyRowMapper<>(Book.class));
-        if (book.size() > 0) {
-            return book.get(0);
-        } else {
-            return null;
-        }
+        Optional<Book> book = bookRepository.findById(id);
+        return book.orElse(null);
     }
 
     @Override
     public void updateInventory(Integer id, Integer inventory) {
-        String sql = "UPDATE book SET inventory = ? WHERE id = ?";
-        jdbcTemplate.update(sql, inventory, id);
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isPresent()) {
+            Book newBook = book.get();
+            newBook.setInventory(inventory);
+            bookRepository.save(newBook);
+        }
     }
 }
