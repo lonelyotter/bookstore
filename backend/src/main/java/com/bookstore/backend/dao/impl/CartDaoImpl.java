@@ -1,61 +1,67 @@
 package com.bookstore.backend.dao.impl;
 
+import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.CartDao;
 import com.bookstore.backend.entity.CartItem;
+import com.bookstore.backend.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @Repository
+@Transactional
 public class CartDaoImpl implements CartDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    BookDao bookDao;
+
+    @Autowired
+    CartRepository cartRepository;
+
     @Override
     public List<CartItem> getCartItems(Integer userId) {
-        String sql = "SELECT cart.id as id, cart.bookId as bookId, book.name as name, book.price as price, book.image as image, cart.nums as nums FROM cart, book WHERE cart.userId = " + userId + " and cart.bookId = book.id";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItem.class));
+        return cartRepository.findByUserId(userId);
     }
 
     @Override
     public void deleteCartItem(Integer id) {
-        String sql = "SELECT nums FROM cart WHERE id = ?";
-        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, id);
-        if (result.size() > 0) {
-            Integer nums = (Integer) result.get(0).get("nums");
-            if (nums > 1) {
-                sql = "UPDATE cart SET nums = ? where id = ?";
-                jdbcTemplate.update(sql, nums - 1, id);
+        Optional<CartItem> item = cartRepository.findById(id);
+        if (item.isPresent()) {
+            CartItem newItem = item.get();
+            if (newItem.getNums() == 1) {
+                cartRepository.delete(newItem);
             } else {
-                sql = "DELETE FROM cart WHERE id = ?";
-                jdbcTemplate.update(sql, id);
+                newItem.setNums(newItem.getNums() - 1);
+                cartRepository.save(newItem);
             }
         }
     }
 
     @Override
     public void addCartItem(Integer userId, Integer bookId) {
-        String sql = "SELECT id, nums FROM cart WHERE userId = ? and bookId = ?";
-        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, userId, bookId);
-        if (result.size() > 0) {
-            Integer id = (Integer) result.get(0).get("id");
-            Integer nums = (Integer) result.get(0).get("nums");
-            sql = "UPDATE cart SET nums = ? where id = ?";
-            jdbcTemplate.update(sql, nums + 1, id);
+        Optional<CartItem> item = cartRepository.findByUserIdAndBookId(userId, bookId);
+        CartItem newItem;
+        if (item.isPresent()) {
+            newItem = item.get();
+            newItem.setNums(1 + newItem.getNums());
         } else {
-            sql = "INSERT INTO cart(userId, bookId, nums) VALUE(?, ?, ?) ";
-            jdbcTemplate.update(sql, userId, bookId, 1);
+            newItem = new CartItem();
+            newItem.setUserId(userId);
+            newItem.setBook(bookDao.getBook(bookId));
+            newItem.setNums(1);
         }
+        cartRepository.save(newItem);
     }
 
     @Override
     public void clearCart(Integer userId) {
-        String sql = "DELETE FROM cart where userId = ?";
-        jdbcTemplate.update(sql, userId);
+        cartRepository.deleteAllByUserId(userId);
     }
 }

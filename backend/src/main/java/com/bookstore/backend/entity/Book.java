@@ -1,7 +1,6 @@
 package com.bookstore.backend.entity;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "book")
@@ -24,7 +23,7 @@ public class Book {
     private String author;
 
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal price;
+    private Double price;
 
     @Column(name = "description", length = 2000)
     private String description;
@@ -75,11 +74,11 @@ public class Book {
         this.author = author;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

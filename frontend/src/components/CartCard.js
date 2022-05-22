@@ -21,7 +21,7 @@ export default function CartCard(props) {
             >
               <h2>{props.bookInfo.name}</h2>
               <h3 style={{ color: "red" }}>¥{props.bookInfo.price}</h3>
-              <h3>数量 {props.bookInfo.nums}</h3>
+              <h3>数量 {props.nums}</h3>
             </div>
           </Col>
           <Col>
@@ -30,7 +30,7 @@ export default function CartCard(props) {
               <Button
                 type="primary"
                 block
-                onClick={() => props.addItem(props.bookInfo.bookId)}
+                onClick={() => props.addItem(props.bookInfo.id)}
               >
                 +
               </Button>
@@ -41,7 +41,7 @@ export default function CartCard(props) {
                 type={"primary"}
                 danger
                 block
-                onClick={() => props.removeItem(props.bookInfo.id)}
+                onClick={() => props.removeItem(props.itemId)}
               >
                 -
               </Button>

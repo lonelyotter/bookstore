@@ -34,22 +34,22 @@ public class OrderServiceImpl implements OrderService {
         // 判断是否有商品库存不足并同时计算订单总价
         double totalPrice = 0.0;
         for (CartItem item : items) {
-            int inventory = bookDao.getBook(item.getBookId()).getInventory();
+            int inventory = bookDao.getBook(item.getBook().getId()).getInventory();
             if (inventory < item.getNums()) {
-                return item.getName() + "库存不足，仅剩" + inventory + "本";
+                return item.getBook().getName() + "库存不足，仅剩" + inventory + "本";
             }
-            totalPrice += item.getPrice() * item.getNums();
+            totalPrice += item.getBook().getPrice() * item.getNums();
         }
 
         // 更新商品库存
         for (CartItem item : items) {
-            int inventory = bookDao.getBook(item.getBookId()).getInventory();
-            bookDao.updateInventory(item.getBookId(), inventory - item.getNums());
+            int inventory = bookDao.getBook(item.getBook().getId()).getInventory();
+            bookDao.updateInventory(item.getBook().getId(), inventory - item.getNums());
         }
 
         // 创建订单并清空购物车
         Integer orderId = orderDao.createOrder(userId, name, phone, address, note, totalPrice);
-        items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBookId(), item.getNums()));
+        items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBook().getId(), item.getNums()));
         cartDao.clearCart(userId);
         return "购买成功";
     }

@@ -63,7 +63,9 @@ export default function CartContent() {
         <div>
           {cartItems.map((cartItem) => (
             <CartCard
-              bookInfo={cartItem}
+              bookInfo={cartItem.book}
+              nums={cartItem.nums}
+              itemId={cartItem.id}
               removeItem={removeItem}
               addItem={addItem}
               key={cartItem.id}
