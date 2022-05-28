@@ -19,9 +19,6 @@ import com.bookstore.backend.entity.OrderItem;
 public class OrderDaoImpl implements OrderDao {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
-
-    @Autowired
     BookDao bookDao;
 
     @Autowired

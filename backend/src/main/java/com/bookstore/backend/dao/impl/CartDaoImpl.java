@@ -17,9 +17,6 @@ import java.util.Optional;
 public class CartDaoImpl implements CartDao {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
-
-    @Autowired
     BookDao bookDao;
 
     @Autowired

@@ -7,22 +7,23 @@ import com.bookstore.backend.entity.User;
 
 import com.bookstore.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserDaoImpl implements UserDao {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
-
-    @Autowired
     UserRepository userRepository;
 
     @Override
     public void register(String username, String password, String email) {
-        String sql = "INSERT INTO user(username, password, email, isAdmin, isEnabled) VALUES ('" + username + "', '" + password + "', '" + email + "', " + 0 + ", " + 1 + ")";
-        jdbcTemplate.update(sql);
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setIsAdmin(0);
+        user.setIsEnabled(1);
+        userRepository.save(user);
     }
 
     @Override
