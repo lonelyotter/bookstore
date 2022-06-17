@@ -10,4 +10,6 @@ public interface BookDao {
     Book getBook(Integer id);
 
     void updateInventory(Integer id, Integer inventory);
+
+    void updateBook(Book book);
 }

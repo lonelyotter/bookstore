@@ -24,25 +24,12 @@ export default function BookEdit(props) {
   return (
     <div>
       <div style={{ display: "flex" }}>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div
-            style={{
-              width: 170,
-              height: 240,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              border: "2px dashed grey",
-              borderRadius: 10,
-            }}
-          >
-            <h1>上传封面</h1>
-          </div>
-        </div>
-        <div style={{ flex: 1, paddingLeft: 32 }}>
+        <div style={{ flex: 1 }}>
           <Form
             name="nest-messages"
-            onFinish={(values) => props.updateBook(values)}
+            onFinish={(values) =>
+              props.updateBook({ id: props.bookId, ...values })
+            }
             validateMessages={validateMessages}
             style={{ width: "100%" }}
             form={form}
@@ -124,6 +111,19 @@ export default function BookEdit(props) {
               ]}
             >
               <InputNumber />
+            </Form.Item>
+            <Form.Item
+              labelCol={{ span: 4 }}
+              wrapperCol={{ span: 15 }}
+              name={"image"}
+              label="封面URL"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input />
             </Form.Item>
 
             <Form.Item

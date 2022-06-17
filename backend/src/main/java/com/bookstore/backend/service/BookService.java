@@ -9,4 +9,6 @@ public interface BookService {
     List<Book> getBooks();
 
     Book getBook(Integer id);
+
+    void updateBook(Book book);
 }

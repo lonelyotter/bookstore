@@ -73,3 +73,13 @@ export function getOrderDetail(id) {
     .then((res) => res.data)
     .catch((err) => err);
 }
+
+export function updateBook(bookDetail) {
+  return instance({
+    method: "POST",
+    url: "/admin/book",
+    data: bookDetail,
+  })
+    .then((res) => res.data)
+    .catch((err) => err);
+}

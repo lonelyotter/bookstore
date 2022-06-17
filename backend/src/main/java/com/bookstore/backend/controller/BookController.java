@@ -23,4 +23,9 @@ public class BookController {
     public Book getBook(@PathVariable Integer id) {
         return bookService.getBook(id);
     }
+
+    @PostMapping("/admin/book")
+    public void updateBook(@RequestBody Book book) {
+        bookService.updateBook(book);
+    }
 }
