@@ -4,7 +4,9 @@ import {
   LogoutOutlined,
   ShoppingCartOutlined,
   FileTextOutlined,
-  EditOutlined,
+  BookOutlined,
+  UserOutlined,
+  BarChartOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { logout } from "../services/auth";
@@ -23,13 +25,28 @@ export default function UserAvatar({ user, setUser }) {
           <span>我的订单</span>
         </Link>
       </Menu.Item>
+      <Menu.Item icon={<BarChartOutlined />} key={3}>
+        <Link to={"/#"}>
+          <span>购买统计</span>
+        </Link>
+      </Menu.Item>
 
       {user.isAdmin === 1 && (
         <>
           <Menu.Divider />
-          <Menu.Item icon={<EditOutlined />} key={3}>
+          <Menu.Item icon={<BookOutlined />} key={4}>
             <Link to={"/bookManage"}>
               <span>书籍管理</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item icon={<FileTextOutlined />} key={5}>
+            <Link to={"/ordersManage"}>
+              <span>订单管理</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item icon={<UserOutlined />} key={6}>
+            <Link to={"/#"}>
+              <span>用户管理</span>
             </Link>
           </Menu.Item>
         </>

@@ -3,14 +3,18 @@ package com.bookstore.backend.service.impl;
 import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.CartDao;
 import com.bookstore.backend.dao.OrderDao;
+import com.bookstore.backend.dao.UserDao;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderItem;
+import com.bookstore.backend.security.auth.AuthUserDetail;
 import com.bookstore.backend.service.OrderService;
 import com.bookstore.backend.entity.CartItem;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,6 +28,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     BookDao bookDao;
+
+    @Autowired
+    UserDao userDao;
 
     @Override
     public String checkout(Integer userId, String name, String phone, String address, String note) {
@@ -61,6 +68,24 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderItem> getOrderDetail(Integer id) {
-        return orderDao.getItemsOfOrder(id);
+        AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Integer userId = user.getId();
+        List<OrderItem> temp = orderDao.getItemsOfOrder(id);
+        boolean isAdmin = userDao.getUser(userId).getIsAdmin() == 1;
+        if (isAdmin || Objects.equals(userId, orderDao.getOrder(id).get().getUserId())) {
+            return temp;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        List<Order> temp = orderDao.getAllOrders();
+        for (Order order : temp) {
+            String username = userDao.getUser(order.getUserId()).getUsername();
+            order.setUsername(username);
+        }
+        return temp;
     }
 }

@@ -1,6 +1,7 @@
 package com.bookstore.backend.dao.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.OrderDao;
@@ -62,5 +63,15 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<OrderItem> getItemsOfOrder(Integer orderId) {
         return orderItemRepository.findByOrderId(orderId);
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    @Override
+    public Optional<Order> getOrder(Integer orderId) {
+        return orderRepository.findById(orderId);
     }
 }

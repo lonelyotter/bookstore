@@ -11,4 +11,6 @@ public interface OrderService {
     List<Order> getOrders(Integer userId);
 
     List<OrderItem> getOrderDetail(Integer id);
+
+    List<Order> getAllOrders();
 }

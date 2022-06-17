@@ -40,4 +40,9 @@ public class OrderController {
     public List<OrderItem> getOrderDetail(@RequestParam Integer id) {
         return orderService.getOrderDetail(id);
     }
+
+    @GetMapping("/admin/orders")
+    public List<Order> getAllOrders() {
+        return orderService.getAllOrders();
+    }
 }

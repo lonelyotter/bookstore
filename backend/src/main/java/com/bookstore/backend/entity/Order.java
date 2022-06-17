@@ -36,6 +36,17 @@ public class Order {
     @Column(name = "note", length = 1000)
     private String note;
 
+    @Transient
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -13,6 +13,7 @@ import BookStoreFooter from "./components/BookStoreFooter";
 import { getUser } from "./services/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import OrderDetailView from "./view/OrderDetailView";
+import OrdersManageView from "./view/OrdersManageView";
 
 export default function BasicRoute() {
   const [user, setUser] = useState(getUser());
@@ -31,6 +32,8 @@ export default function BasicRoute() {
         <PrivateRoute path={"/bookManage"} component={BookManageView} />
         <PrivateRoute path={"/orders"} component={OrdersView} />
         <PrivateRoute path={"/order/:orderId"} component={OrderDetailView} />
+        <PrivateRoute path={"/ordersManage"} component={OrdersManageView} />
+
         <PrivateRoute path={"/*"} component={HomeView} />
       </Switch>
       <BookStoreFooter />

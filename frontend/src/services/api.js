@@ -65,6 +65,13 @@ export function getOrders() {
     .catch((err) => err);
 }
 
+export function getAllOrders() {
+  return instance
+    .get("/admin/orders")
+    .then((res) => res.data)
+    .catch((err) => err);
+}
+
 export function getOrderDetail(id) {
   return instance
     .get("/order", {
