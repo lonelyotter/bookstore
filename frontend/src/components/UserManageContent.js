@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Divider, Row, Table, message } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import { getUsers, enableUser, disableUser } from "../services/api";
 
 export default function UserManageContent() {
@@ -81,7 +81,7 @@ export default function UserManageContent() {
   return (
     <div>
       <Divider style={{ fontSize: "xx-large" }}>
-        <EditOutlined /> <span> 用户管理</span>
+        <UserOutlined /> <span> 用户管理</span>
       </Divider>
       <Row>
         <Col

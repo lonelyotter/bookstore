@@ -11,5 +11,4 @@ public interface CartService {
 
     void addCartItem(Integer userId, Integer bookId);
 
-    void clearCart(Integer userId);
 }

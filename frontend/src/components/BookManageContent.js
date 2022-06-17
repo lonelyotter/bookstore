@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Col, Divider, Row, Table } from "antd";
-import { EditOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import { BookOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import Search from "antd/es/input/Search";
 import BookEdit from "./BookEdit";
 import { getBooks, updateBook, deleteBook } from "../services/api";
@@ -106,7 +106,7 @@ export default function BookManageContent() {
   return (
     <div>
       <Divider style={{ fontSize: "xx-large" }}>
-        <EditOutlined /> <span> 书籍管理</span>
+        <BookOutlined /> <span> 书籍管理</span>
       </Divider>
       <Row>
         <Col span={24}>

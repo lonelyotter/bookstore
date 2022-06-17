@@ -11,7 +11,6 @@ import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.repository.OrderItemRepository;
 import com.bookstore.backend.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.bookstore.backend.entity.OrderItem;
 
