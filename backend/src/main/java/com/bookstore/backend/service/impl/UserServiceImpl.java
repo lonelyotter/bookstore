@@ -1,9 +1,10 @@
 package com.bookstore.backend.service.impl;
 
-import java.util.Optional;
+import java.util.List;
 
 import com.bookstore.backend.dao.UserDao;
 import com.bookstore.backend.entity.User;
+import com.bookstore.backend.entity.UserManage;
 import com.bookstore.backend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(String username) {
         return userDao.getUser(username);
+    }
+
+    @Override
+    public List<UserManage> getUsers() {
+        return userDao.getUsers();
+    }
+
+    @Override
+    public void enableUser(Integer userId) {
+        if (userDao.getUser(userId).getIsAdmin() == 0) {
+            userDao.enableUser(userId);
+        }
+    }
+
+    @Override
+    public void disableUser(Integer userId) {
+        if (userDao.getUser(userId).getIsAdmin() == 0) {
+            userDao.disableUser(userId);
+        }
     }
 }

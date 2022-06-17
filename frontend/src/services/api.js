@@ -100,3 +100,30 @@ export function deleteBook(bookId) {
     .then((res) => res.data)
     .catch((err) => err);
 }
+
+export function getUsers() {
+  return instance
+    .get("/admin/users")
+    .then((res) => res.data)
+    .catch((err) => err);
+}
+
+export function enableUser(userId) {
+  return instance({
+    method: "POST",
+    url: "/admin/enableUser",
+    params: { userId: userId },
+  })
+    .then((res) => res.data)
+    .catch((err) => err);
+}
+
+export function disableUser(userId) {
+  return instance({
+    method: "POST",
+    url: "/admin/disableUser",
+    params: { userId: userId },
+  })
+    .then((res) => res.data)
+    .catch((err) => err);
+}

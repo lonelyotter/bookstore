@@ -1,14 +1,13 @@
 package com.bookstore.backend.controller;
 
+import java.util.List;
 import java.util.Map;
 
+import com.bookstore.backend.entity.UserManage;
 import com.bookstore.backend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -23,5 +22,20 @@ public class UserController {
         String password = body.get("password");
         String email = body.get("email");
         return userService.register(username, password, email);
+    }
+
+    @GetMapping("/admin/users")
+    public List<UserManage> getUsers() {
+        return userService.getUsers();
+    }
+
+    @PostMapping("/admin/enableUser")
+    public void enableUser(@RequestParam Integer userId) {
+        userService.enableUser(userId);
+    }
+
+    @PostMapping("/admin/disableUser")
+    public void disableUser(@RequestParam Integer userId) {
+        userService.disableUser(userId);
     }
 }

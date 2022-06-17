@@ -45,7 +45,7 @@ export default function UserAvatar({ user, setUser }) {
             </Link>
           </Menu.Item>
           <Menu.Item icon={<UserOutlined />} key={6}>
-            <Link to={"/#"}>
+            <Link to={"/userManage"}>
               <span>用户管理</span>
             </Link>
           </Menu.Item>

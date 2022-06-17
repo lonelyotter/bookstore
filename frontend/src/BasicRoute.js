@@ -14,6 +14,7 @@ import { getUser } from "./services/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import OrderDetailView from "./view/OrderDetailView";
 import OrdersManageView from "./view/OrdersManageView";
+import UserManageView from "./view/UserManageView";
 
 export default function BasicRoute() {
   const [user, setUser] = useState(getUser());
@@ -30,6 +31,7 @@ export default function BasicRoute() {
         <PrivateRoute path={"/book/:bookId"} component={BookView} />
         <PrivateRoute path={"/search"} component={SearchView} />
         <PrivateRoute path={"/bookManage"} component={BookManageView} />
+        <PrivateRoute path={"/userManage"} component={UserManageView} />
         <PrivateRoute path={"/orders"} component={OrdersView} />
         <PrivateRoute path={"/order/:orderId"} component={OrderDetailView} />
         <PrivateRoute path={"/ordersManage"} component={OrdersManageView} />
