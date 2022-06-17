@@ -7,4 +7,4 @@ front-end:
 
 back-end:
 
-* Spring Boot
+* Spring
