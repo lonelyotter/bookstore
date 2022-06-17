@@ -12,4 +12,6 @@ public interface CartDao {
     void addCartItem(Integer userId, Integer bookId);
 
     void clearCart(Integer userId);
+
+    void deleteByBookId(Integer bookId);
 }

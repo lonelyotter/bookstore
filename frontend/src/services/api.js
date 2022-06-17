@@ -83,3 +83,13 @@ export function updateBook(bookDetail) {
     .then((res) => res.data)
     .catch((err) => err);
 }
+
+export function deleteBook(bookId) {
+  return instance({
+    method: "DELETE",
+    url: "/admin/book",
+    params: { id: bookId },
+  })
+    .then((res) => res.data)
+    .catch((err) => err);
+}

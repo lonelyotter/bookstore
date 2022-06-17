@@ -26,6 +26,7 @@ export default function UserAvatar({ user, setUser }) {
 
       {user.isAdmin === 1 && (
         <>
+          <Menu.Divider />
           <Menu.Item icon={<EditOutlined />} key={3}>
             <Link to={"/bookManage"}>
               <span>书籍管理</span>

@@ -3,7 +3,7 @@ import { Modal, Button, Col, Divider, Row, Table } from "antd";
 import { EditOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import Search from "antd/es/input/Search";
 import BookEdit from "./BookEdit";
-import { getBooks, updateBook } from "../services/api";
+import { getBooks, updateBook, deleteBook } from "../services/api";
 
 const { confirm } = Modal;
 
@@ -19,14 +19,13 @@ export default function BookManageContent() {
   const updateBooks = () => getBooks().then((data) => setBooks(data));
 
   const myUpdateBook = (bookInfo) => {
-    console.log(bookInfo);
     updateBook(bookInfo)
       .then(() => setCurrentBook(null))
       .then(() => updateBooks());
   };
 
-  const deleteBook = (id) => {
-    setBooks(books.filter((book) => book.id !== id));
+  const myDeleteBook = (id) => {
+    deleteBook(id).then(() => updateBooks());
   };
 
   function showDeleteConfirm(name, id) {
@@ -39,7 +38,7 @@ export default function BookManageContent() {
       cancelText: "取消",
       autoFocusButton: null,
       onOk() {
-        deleteBook(id);
+        myDeleteBook(id);
       },
     });
   }

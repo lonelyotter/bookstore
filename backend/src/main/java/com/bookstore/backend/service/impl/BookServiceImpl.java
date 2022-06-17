@@ -1,6 +1,7 @@
 package com.bookstore.backend.service.impl;
 
 import com.bookstore.backend.dao.impl.BookDaoImpl;
+import com.bookstore.backend.dao.impl.CartDaoImpl;
 import com.bookstore.backend.entity.Book;
 import com.bookstore.backend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,11 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
 
     @Autowired
-    private BookDaoImpl bookDao;
+    BookDaoImpl bookDao;
+
+    @Autowired
+    CartDaoImpl cartDao;
+
 
     @Override
     public List<Book> getBooks() {
@@ -27,5 +32,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public void updateBook(Book book) {
         bookDao.updateBook(book);
+    }
+
+    @Override
+    public void deleteBook(Integer id) {
+        cartDao.deleteByBookId(id);
+        bookDao.deleteBook(id);
     }
 }

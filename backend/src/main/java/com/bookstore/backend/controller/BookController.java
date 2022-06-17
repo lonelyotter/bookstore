@@ -28,4 +28,9 @@ public class BookController {
     public void updateBook(@RequestBody Book book) {
         bookService.updateBook(book);
     }
+
+    @DeleteMapping("/admin/book")
+    public void deleteBook(@RequestParam Integer id) {
+        bookService.deleteBook(id);
+    }
 }
