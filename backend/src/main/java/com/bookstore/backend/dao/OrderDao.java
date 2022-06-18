@@ -3,6 +3,7 @@ package com.bookstore.backend.dao;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderItem;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,4 +20,7 @@ public interface OrderDao {
 
     Optional<Order> getOrder(Integer orderId);
 
+    List<Order> getOrdersByUserIdAndTimeBetween(Integer userId, Date time1, Date time2);
+
+    List<Order> getOrdersByTimeBetween(Date time, Date time2);
 }

@@ -32,6 +32,7 @@ export default function UserManageContent() {
       dataIndex: "isAdmin",
       key: "isAdmin",
     },
+
     {
       title: "是否正常用户",
       dataIndex: "isEnabled",

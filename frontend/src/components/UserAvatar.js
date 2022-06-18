@@ -49,6 +49,16 @@ export default function UserAvatar({ user, setUser }) {
               <span>用户管理</span>
             </Link>
           </Menu.Item>
+          <Menu.Item icon={<BarChartOutlined />} key={7}>
+            <Link to={"/#"}>
+              <span>书籍销量统计</span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item icon={<BarChartOutlined />} key={8}>
+            <Link to={"/usersStatistic"}>
+              <span>用户消费统计</span>
+            </Link>
+          </Menu.Item>
         </>
       )}
       <Menu.Divider />

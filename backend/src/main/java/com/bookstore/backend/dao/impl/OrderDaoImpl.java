@@ -1,5 +1,6 @@
 package com.bookstore.backend.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,5 +73,15 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Optional<Order> getOrder(Integer orderId) {
         return orderRepository.findById(orderId);
+    }
+
+    @Override
+    public List<Order> getOrdersByUserIdAndTimeBetween(Integer userId, Date time1, Date time2) {
+        return orderRepository.findByUserIdAndTimeBetween(userId, time1, time2);
+    }
+
+    @Override
+    public List<Order> getOrdersByTimeBetween(Date time1, Date time2) {
+        return orderRepository.findByTimeBetween(time1, time2);
     }
 }

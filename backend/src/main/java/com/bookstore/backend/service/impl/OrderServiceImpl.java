@@ -6,12 +6,14 @@ import com.bookstore.backend.dao.OrderDao;
 import com.bookstore.backend.dao.UserDao;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderItem;
+import com.bookstore.backend.entity.UsersStatistic;
 import com.bookstore.backend.security.auth.AuthUserDetail;
 import com.bookstore.backend.service.OrderService;
 import com.bookstore.backend.entity.CartItem;
 
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -87,5 +89,22 @@ public class OrderServiceImpl implements OrderService {
             order.setUsername(username);
         }
         return temp;
+    }
+
+    @Override
+    public List<UsersStatistic> getUsersStatistic(Date time1, Date time2) {
+        List<Order> orders = orderDao.getOrdersByTimeBetween(time1, time2);
+        HashMap<Integer, UsersStatistic> temp = new HashMap<>();
+        for (Order order : orders) {
+            if (!temp.containsKey(order.getUserId())) {
+                UsersStatistic newStat = new UsersStatistic();
+                newStat.setMoney(0.0);
+                newStat.setUsername(userDao.getUser(order.getUserId()).getUsername());
+                temp.put(order.getUserId(), newStat);
+            }
+            UsersStatistic stat = temp.get(order.getUserId());
+            stat.setMoney(stat.getMoney() + order.getPrice());
+        }
+        return new ArrayList<>(temp.values());
     }
 }

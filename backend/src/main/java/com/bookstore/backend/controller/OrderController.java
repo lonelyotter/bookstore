@@ -1,14 +1,20 @@
 package com.bookstore.backend.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderItem;
+import com.bookstore.backend.entity.UsersStatistic;
 import com.bookstore.backend.security.auth.AuthUserDetail;
 import com.bookstore.backend.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,5 +50,14 @@ public class OrderController {
     @GetMapping("/admin/orders")
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
+    }
+
+    @GetMapping("/admin/usersStatistic")
+    public List<UsersStatistic> getUsersStatistic(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime time1,
+                                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime time2) {
+
+        Date startDate = Date.from(time1.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(time2.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        return orderService.getUsersStatistic(startDate, endDate);
     }
 }
