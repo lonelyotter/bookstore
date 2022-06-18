@@ -97,6 +97,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order getOrderInformation(Integer id) {
+        AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Integer userId = user.getId();
+        Optional<Order> temp = orderDao.getOrder(id);
+        boolean isAdmin = userDao.getUser(userId).getIsAdmin() == 1;
+        if (isAdmin || Objects.equals(userId, orderDao.getOrder(id).get().getUserId())) {
+            return temp.orElse(null);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public List<Order> getAllOrdersByName(String name) {
         List<Order> orders = orderDao.getAllOrders();
         for (Order order : orders) {

@@ -12,6 +12,8 @@ public interface OrderService {
 
     List<OrderItem> getOrderDetail(Integer id);
 
+    Order getOrderInformation(Integer id);
+
     List<Order> getAllOrdersByName(String name);
 
     List<UsersStatistic> getUsersStatistic(Date time1, Date time2);

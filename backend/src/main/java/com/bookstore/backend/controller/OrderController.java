@@ -44,6 +44,11 @@ public class OrderController {
         return orderService.getOrderDetail(id);
     }
 
+    @GetMapping("/orderInfo")
+    public Order getOrderInfo(@RequestParam Integer id) {
+        return orderService.getOrderInformation(id);
+    }
+
     @GetMapping("/admin/orders")
     public List<Order> getAllOrdersByName(@RequestParam String name) {
         return orderService.getAllOrdersByName(name);

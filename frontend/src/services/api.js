@@ -158,3 +158,12 @@ export function getStatistic(time1, time2) {
     .then((res) => res.data)
     .catch((err) => err);
 }
+
+export function getOrderInfo(id) {
+  return instance
+    .get("/orderInfo", {
+      params: { id: id },
+    })
+    .then((res) => res.data)
+    .catch((err) => err);
+}
