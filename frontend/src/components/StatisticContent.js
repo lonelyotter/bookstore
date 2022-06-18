@@ -13,7 +13,11 @@ const defaultDateRange = [
 ];
 
 export default function StatisticContent() {
-  const [stat, setStat] = useState([]);
+  const [stat, setStat] = useState({
+    booksStatisticList: [],
+    totalNums: 0,
+    totalMoney: 0,
+  });
   const [dateRange, setDateRange] = useState(null);
 
   useEffect(() => {
@@ -70,7 +74,7 @@ export default function StatisticContent() {
               {stat.totalNums}
             </Descriptions.Item>
             <Descriptions.Item label="购买总金额">
-              {stat.totalMoney}¥
+              {stat.totalMoney.toFixed(2)}¥
             </Descriptions.Item>
           </Descriptions>
         </Col>
