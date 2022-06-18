@@ -17,12 +17,12 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public List<Book> getBooks() {
-        return bookRepository.findAll();
+        return bookRepository.findByIsDeleted(0);
     }
 
     @Override
     public Book getBook(Integer id) {
-        Optional<Book> book = bookRepository.findById(id);
+        Optional<Book> book = bookRepository.findByIdAndIsDeleted(id, 0);
         return book.orElse(null);
     }
 
@@ -43,10 +43,11 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public void deleteBook(Integer id) {
-        Optional<Book> temp = bookRepository.findById(id);
+        Optional<Book> temp = bookRepository.findByIdAndIsDeleted(id, 0);
         if (temp.isPresent()) {
             Book book = temp.get();
-            bookRepository.delete(book);
+            book.setIsDeleted(1);
+            bookRepository.save(book);
         }
     }
 }

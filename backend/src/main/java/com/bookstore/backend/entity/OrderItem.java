@@ -10,16 +10,16 @@ public class OrderItem {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable = false)
+    @Transient
     private String name;
 
-    @Column(name = "isbn", nullable = false)
+    @Transient
     private String isbn;
 
     @Column(name = "nums", nullable = false)
     private Integer nums;
 
-    @Column(name = "author", nullable = false)
+    @Transient
     private String author;
 
     @Column(name = "price", nullable = false)

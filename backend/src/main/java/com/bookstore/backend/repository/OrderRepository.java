@@ -15,5 +15,5 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> findByUserIdAndTimeBetween(Integer userId, Date time1, Date time2);
 
-    List<Order> findByTimeBetween(Date time, Date time2);
+    List<Order> findByTimeBetween(Date time1, Date time2);
 }

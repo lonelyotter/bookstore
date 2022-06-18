@@ -48,11 +48,15 @@ public class OrderDaoImpl implements OrderDao {
         item.setOrderId(orderId);
         item.setBookId(bookId);
         item.setNums(nums);
-        item.setName(book.getName());
-        item.setIsbn(book.getIsbn());
-        item.setAuthor(book.getAuthor());
         item.setPrice(book.getPrice());
         orderItemRepository.save(item);
+    }
+
+    private void setOrderItemInformation(OrderItem orderItem) {
+        Book book = bookDao.getBook(orderItem.getBookId());
+        orderItem.setName(book.getName());
+        orderItem.setAuthor(book.getAuthor());
+        orderItem.setIsbn(book.getIsbn());
     }
 
     @Override
@@ -62,7 +66,11 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<OrderItem> getItemsOfOrder(Integer orderId) {
-        return orderItemRepository.findByOrderId(orderId);
+        List<OrderItem> orderItems = orderItemRepository.findByOrderId(orderId);
+        for (OrderItem orderItem : orderItems) {
+            setOrderItemInformation(orderItem);
+        }
+        return orderItems;
     }
 
     @Override
