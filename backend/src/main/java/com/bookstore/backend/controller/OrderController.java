@@ -6,10 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.bookstore.backend.entity.BooksStatistic;
-import com.bookstore.backend.entity.Order;
-import com.bookstore.backend.entity.OrderItem;
-import com.bookstore.backend.entity.UsersStatistic;
+import com.bookstore.backend.entity.*;
 import com.bookstore.backend.security.auth.AuthUserDetail;
 import com.bookstore.backend.service.OrderService;
 
@@ -67,5 +64,14 @@ public class OrderController {
         Date startDate = Date.from(time1.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
         Date endDate = Date.from(time2.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
         return orderService.getBooksStatistic(startDate, endDate);
+    }
+
+    @GetMapping("/statistic")
+    public SingleUserStatistic getSingleUserStatistic(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime time1,
+                                                      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime time2) {
+        Date startDate = Date.from(time1.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(time2.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return orderService.getCustomerStatistic(user.getId(), startDate, endDate);
     }
 }

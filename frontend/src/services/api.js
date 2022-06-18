@@ -145,3 +145,12 @@ export function getBooksStatistic(time1, time2) {
     .then((res) => res.data)
     .catch((err) => err);
 }
+
+export function getStatistic(time1, time2) {
+  return instance
+    .get("/statistic", {
+      params: { time1: time1, time2: time2 },
+    })
+    .then((res) => res.data)
+    .catch((err) => err);
+}

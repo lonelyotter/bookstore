@@ -1,11 +1,6 @@
 package com.bookstore.backend.service;
 
-import com.bookstore.backend.entity.BooksStatistic;
-import com.bookstore.backend.entity.Order;
-import com.bookstore.backend.entity.OrderItem;
-import com.bookstore.backend.entity.UsersStatistic;
-
-import java.time.LocalDate;
+import com.bookstore.backend.entity.*;
 
 import java.util.Date;
 import java.util.List;
@@ -22,4 +17,6 @@ public interface OrderService {
     List<UsersStatistic> getUsersStatistic(Date time1, Date time2);
 
     List<BooksStatistic> getBooksStatistic(Date time1, Date time2);
+
+    SingleUserStatistic getCustomerStatistic(Integer userId, Date time1, Date time2);
 }

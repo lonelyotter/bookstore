@@ -123,4 +123,33 @@ public class OrderServiceImpl implements OrderService {
         }
         return new ArrayList<>(temp.values());
     }
+
+    @Override
+    public SingleUserStatistic getCustomerStatistic(Integer userId, Date time1, Date time2) {
+        Integer totalNums = 0;
+        double totalMoney = 0.0;
+        HashMap<Integer, BooksStatistic> temp = new HashMap<>();
+        List<Order> orders = orderDao.getOrdersByUserIdAndTimeBetween(userId, time1, time2);
+        for (Order order : orders) {
+            List<OrderItem> orderItems = orderDao.getItemsOfOrder(order.getId());
+            for (OrderItem orderItem : orderItems) {
+                Book book = bookDao.getBook(orderItem.getBookId());
+                if (!temp.containsKey(book.getId())) {
+                    BooksStatistic booksStatistic = new BooksStatistic();
+                    booksStatistic.setName(book.getName());
+                    booksStatistic.setNums(0);
+                    temp.put(book.getId(), booksStatistic);
+                }
+                BooksStatistic booksStatistic = temp.get(book.getId());
+                totalNums += orderItem.getNums();
+                totalMoney += orderItem.getPrice() * orderItem.getNums();
+                booksStatistic.setNums(booksStatistic.getNums() + orderItem.getNums());
+            }
+        }
+        SingleUserStatistic singleUserStatistic = new SingleUserStatistic();
+        singleUserStatistic.setTotalNums(totalNums);
+        singleUserStatistic.setTotalMoney(totalMoney);
+        singleUserStatistic.setBooksStatisticList(new ArrayList<>(temp.values()));
+        return singleUserStatistic;
+    }
 }
