@@ -4,15 +4,10 @@ import com.bookstore.backend.dao.BookDao;
 import com.bookstore.backend.dao.CartDao;
 import com.bookstore.backend.dao.OrderDao;
 import com.bookstore.backend.dao.UserDao;
-import com.bookstore.backend.entity.Order;
-import com.bookstore.backend.entity.OrderItem;
-import com.bookstore.backend.entity.UsersStatistic;
+import com.bookstore.backend.entity.*;
 import com.bookstore.backend.security.auth.AuthUserDetail;
 import com.bookstore.backend.service.OrderService;
-import com.bookstore.backend.entity.CartItem;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +99,27 @@ public class OrderServiceImpl implements OrderService {
             }
             UsersStatistic stat = temp.get(order.getUserId());
             stat.setMoney(stat.getMoney() + order.getPrice());
+        }
+        return new ArrayList<>(temp.values());
+    }
+
+    @Override
+    public List<BooksStatistic> getBooksStatistic(Date time1, Date time2) {
+        List<Order> orders = orderDao.getOrdersByTimeBetween(time1, time2);
+        HashMap<Integer, BooksStatistic> temp = new HashMap<>();
+        for (Order order : orders) {
+            List<OrderItem> orderItems = orderDao.getItemsOfOrder(order.getId());
+            for (OrderItem orderItem : orderItems) {
+                Book book = bookDao.getBook(orderItem.getBookId());
+                if (!temp.containsKey(book.getId())) {
+                    BooksStatistic booksStatistic = new BooksStatistic();
+                    booksStatistic.setName(book.getName());
+                    booksStatistic.setNums(0);
+                    temp.put(book.getId(), booksStatistic);
+                }
+                BooksStatistic booksStatistic = temp.get(book.getId());
+                booksStatistic.setNums(booksStatistic.getNums() + orderItem.getNums());
+            }
         }
         return new ArrayList<>(temp.values());
     }

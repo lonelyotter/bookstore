@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Divider, Row } from "antd";
 import { BarChartOutlined } from "@ant-design/icons";
 import { DatePicker, Table } from "antd";
-import { getUsersStatistic } from "../services/api";
+import { getBooksStatistic } from "../services/api";
 import moment from "moment";
 
 const { RangePicker } = DatePicker;
@@ -12,20 +12,20 @@ const defaultDateRange = [
   moment("1-1-2099", "MM-DD-YYYY"),
 ];
 
-export default function UsersStatisticContent() {
+export default function BooksStatisticContent() {
   const [stat, setStat] = useState([]);
   const [dateRange, setDateRange] = useState(null);
 
   useEffect(() => {
     if (!dateRange) {
-      getUsersStatistic(
+      getBooksStatistic(
         defaultDateRange[0].format(),
         defaultDateRange[1].format()
       ).then((data) => {
         setStat(data);
       });
     } else {
-      getUsersStatistic(dateRange[0].format(), dateRange[1].format()).then(
+      getBooksStatistic(dateRange[0].format(), dateRange[1].format()).then(
         (data) => {
           setStat(data);
         }
@@ -35,17 +35,17 @@ export default function UsersStatisticContent() {
 
   const columns = [
     {
-      title: "用户名",
-      dataIndex: "username",
-      key: "username",
+      title: "书名",
+      dataIndex: "name",
+      key: "name",
     },
 
     {
-      title: "累计消费金额",
-      dataIndex: "money",
-      key: "money",
+      title: "累计销量",
+      dataIndex: "nums",
+      key: "nums",
       defaultSortOrder: "descend",
-      sorter: (a, b) => a.money - b.money,
+      sorter: (a, b) => a.nums - b.nums,
     },
   ];
 
@@ -53,7 +53,7 @@ export default function UsersStatisticContent() {
     <div>
       <Divider style={{ fontSize: "xx-large" }}>
         <BarChartOutlined />
-        <span> 用户累计消费统计</span>
+        <span> 书籍销量统计</span>
       </Divider>
       <Row>
         {/*filter components*/}

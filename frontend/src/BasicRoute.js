@@ -16,6 +16,7 @@ import OrderDetailView from "./view/OrderDetailView";
 import OrdersManageView from "./view/OrdersManageView";
 import UserManageView from "./view/UserManageView";
 import UsersStatisticView from "./view/UsersStatisticView";
+import BooksStatisticView from "./view/BooksStatisticView";
 
 export default function BasicRoute() {
   const [user, setUser] = useState(getUser());
@@ -37,6 +38,7 @@ export default function BasicRoute() {
         <PrivateRoute path={"/order/:orderId"} component={OrderDetailView} />
         <PrivateRoute path={"/ordersManage"} component={OrdersManageView} />
         <PrivateRoute path={"/usersStatistic"} component={UsersStatisticView} />
+        <PrivateRoute path={"/booksStatistic"} component={BooksStatisticView} />
 
         <PrivateRoute path={"/*"} component={HomeView} />
       </Switch>

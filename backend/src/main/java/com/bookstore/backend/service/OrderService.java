@@ -1,5 +1,6 @@
 package com.bookstore.backend.service;
 
+import com.bookstore.backend.entity.BooksStatistic;
 import com.bookstore.backend.entity.Order;
 import com.bookstore.backend.entity.OrderItem;
 import com.bookstore.backend.entity.UsersStatistic;
@@ -19,4 +20,6 @@ public interface OrderService {
     List<Order> getAllOrders();
 
     List<UsersStatistic> getUsersStatistic(Date time1, Date time2);
+
+    List<BooksStatistic> getBooksStatistic(Date time1, Date time2);
 }

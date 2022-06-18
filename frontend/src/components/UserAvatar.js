@@ -50,7 +50,7 @@ export default function UserAvatar({ user, setUser }) {
             </Link>
           </Menu.Item>
           <Menu.Item icon={<BarChartOutlined />} key={7}>
-            <Link to={"/#"}>
+            <Link to={"/booksStatistic"}>
               <span>书籍销量统计</span>
             </Link>
           </Menu.Item>

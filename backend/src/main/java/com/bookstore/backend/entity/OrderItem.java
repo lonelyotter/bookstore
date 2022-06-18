@@ -94,5 +94,4 @@ public class OrderItem {
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
-
 }
