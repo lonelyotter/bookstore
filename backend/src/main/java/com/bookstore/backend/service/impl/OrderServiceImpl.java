@@ -58,9 +58,29 @@ public class OrderServiceImpl implements OrderService {
         return "购买成功";
     }
 
+    private List<Order> filterOrdersByName(List<Order> orders, String name) {
+        List<Order> res = new ArrayList<>();
+        for (Order order : orders) {
+            boolean flag = false;
+            List<OrderItem> orderItems = orderDao.getItemsOfOrder(order.getId());
+            for (OrderItem orderItem : orderItems) {
+                String bookName = bookDao.getBook(orderItem.getBookId()).getName();
+                if (bookName.toLowerCase().contains(name.toLowerCase())) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag) {
+                res.add(order);
+            }
+        }
+        return res;
+    }
+
     @Override
-    public List<Order> getOrders(Integer userId) {
-        return orderDao.getOrders(userId);
+    public List<Order> getOrdersByName(Integer userId, String name) {
+        List<Order> orders = orderDao.getOrders(userId);
+        return filterOrdersByName(orders, name);
     }
 
     @Override
@@ -77,13 +97,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        List<Order> temp = orderDao.getAllOrders();
-        for (Order order : temp) {
+    public List<Order> getAllOrdersByName(String name) {
+        List<Order> orders = orderDao.getAllOrders();
+        for (Order order : orders) {
             String username = userDao.getUser(order.getUserId()).getUsername();
             order.setUsername(username);
         }
-        return temp;
+        return filterOrdersByName(orders, name);
     }
 
     @Override

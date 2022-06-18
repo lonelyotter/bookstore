@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Divider, Row, Space } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
 import { DatePicker, Table } from "antd";
+import Search from "antd/es/input/Search";
 import { getAllOrders } from "../services/api";
 import { Link } from "react-router-dom";
 
@@ -11,7 +12,7 @@ export default function OrdersContent() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    getAllOrders().then((orders) => {
+    getAllOrders(searchText).then((orders) => {
       let data = orders.map((order) => {
         return {
           username: order.username,
@@ -86,6 +87,7 @@ export default function OrdersContent() {
       ),
     },
   ];
+  const [searchText, setSearchText] = useState("");
 
   const defaultStartDate = new Date("January 1, 1900 00:00:00");
   const defaultEndDate = new Date("January 1, 2099 00:00:00");
@@ -118,12 +120,29 @@ export default function OrdersContent() {
             showTime
           />
 
-          {/*<Search*/}
-          {/*  placeholder="输入书名"*/}
-          {/*  allowClear*/}
-          {/*  style={{ width: 300 }}*/}
-          {/*  onSearch={(v) => setSearchText(v.toLowerCase())}*/}
-          {/*/>*/}
+          <Search
+            placeholder="按书名过滤"
+            allowClear
+            style={{ width: 300 }}
+            onSearch={(v) => {
+              setSearchText(v.toLowerCase());
+              getAllOrders(v.toLowerCase()).then((orders) => {
+                let data = orders.map((order) => {
+                  return {
+                    username: order.username,
+                    orderId: order.id,
+                    name: order.name,
+                    address: order.address,
+                    phone: order.phone,
+                    price: order.price,
+                    purchaseDate: new Date(Date.parse(order.time)),
+                    key: order.id,
+                  };
+                });
+                setOrders(data);
+              });
+            }}
+          />
         </Col>
 
         {/*orders table*/}

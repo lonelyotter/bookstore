@@ -58,16 +58,20 @@ export function checkout(order) {
     .catch((err) => err);
 }
 
-export function getOrders() {
+export function getOrders(name) {
   return instance
-    .get("/orders")
+    .get("/orders", {
+      params: { name: name },
+    })
     .then((res) => res.data)
     .catch((err) => err);
 }
 
-export function getAllOrders() {
+export function getAllOrders(name) {
   return instance
-    .get("/admin/orders")
+    .get("/admin/orders", {
+      params: { name: name },
+    })
     .then((res) => res.data)
     .catch((err) => err);
 }

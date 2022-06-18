@@ -8,11 +8,11 @@ import java.util.List;
 public interface OrderService {
     String checkout(Integer userId, String name, String phone, String address, String note);
 
-    List<Order> getOrders(Integer userId);
+    List<Order> getOrdersByName(Integer userId, String name);
 
     List<OrderItem> getOrderDetail(Integer id);
 
-    List<Order> getAllOrders();
+    List<Order> getAllOrdersByName(String name);
 
     List<UsersStatistic> getUsersStatistic(Date time1, Date time2);
 

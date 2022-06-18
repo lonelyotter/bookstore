@@ -12,7 +12,8 @@ export default function OrdersContent() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    getOrders().then((orders) => {
+    console.log(searchText);
+    getOrders(searchText).then((orders) => {
       let data = orders.map((order) => {
         return {
           orderId: order.id,
@@ -114,12 +115,28 @@ export default function OrdersContent() {
             showTime
           />
 
-          {/*<Search*/}
-          {/*  placeholder="输入书名"*/}
-          {/*  allowClear*/}
-          {/*  style={{ width: 300 }}*/}
-          {/*  onSearch={(v) => setSearchText(v.toLowerCase())}*/}
-          {/*/>*/}
+          <Search
+            placeholder="按书名过滤"
+            allowClear
+            style={{ width: 300 }}
+            onSearch={(v) => {
+              setSearchText(v.toLowerCase());
+              getOrders(v.toLowerCase()).then((orders) => {
+                let data = orders.map((order) => {
+                  return {
+                    orderId: order.id,
+                    name: order.name,
+                    address: order.address,
+                    phone: order.phone,
+                    price: order.price,
+                    purchaseDate: new Date(Date.parse(order.time)),
+                    key: order.id,
+                  };
+                });
+                setOrders(data);
+              });
+            }}
+          />
         </Col>
 
         {/*orders table*/}
@@ -127,7 +144,6 @@ export default function OrdersContent() {
           <Table
             dataSource={orders.filter(
               (book) =>
-                // book.name.toLowerCase().includes(searchText) &&
                 dateRange[0] < book.purchaseDate &&
                 dateRange[1] > book.purchaseDate
             )}

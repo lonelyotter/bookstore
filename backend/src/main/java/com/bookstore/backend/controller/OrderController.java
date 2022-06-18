@@ -34,9 +34,9 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    public List<Order> getOrders() {
+    public List<Order> getOrdersByName(@RequestParam String name) {
         AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return orderService.getOrders(user.getId());
+        return orderService.getOrdersByName(user.getId(), name);
     }
 
     @GetMapping("/order")
@@ -45,8 +45,8 @@ public class OrderController {
     }
 
     @GetMapping("/admin/orders")
-    public List<Order> getAllOrders() {
-        return orderService.getAllOrders();
+    public List<Order> getAllOrdersByName(@RequestParam String name) {
+        return orderService.getAllOrdersByName(name);
     }
 
     @GetMapping("/admin/usersStatistic")
