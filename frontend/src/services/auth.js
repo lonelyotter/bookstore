@@ -37,3 +37,15 @@ export function getUser() {
     return null;
   }
 }
+
+export function register(username, password, email) {
+  return instance({
+    method: "post",
+    url: "/register",
+    data: {
+      username: username,
+      password: password,
+      email: email,
+    },
+  }).then((res) => res);
+}

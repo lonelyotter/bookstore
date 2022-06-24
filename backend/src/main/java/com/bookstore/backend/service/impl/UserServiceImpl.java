@@ -8,7 +8,11 @@ import com.bookstore.backend.entity.UserManage;
 import com.bookstore.backend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.xml.ws.http.HTTPException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -17,13 +21,11 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public String register(String username, String password, String email) {
+    public void register(String username, String password, String email) {
         if (userDao.isUserExist(username)) {
-            return "Username already exists";
-        } else {
-            userDao.register(username, password, email);
-            return "Success";
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "用户名重复");
         }
+        userDao.register(username, password, email);
     }
 
     @Override

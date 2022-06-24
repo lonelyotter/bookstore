@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { getUser, login } from "../services/auth";
+import { Link } from "react-router-dom";
 
 export default function LoginForm({ user, setUser }) {
   const onFinish = ({ username, password }) => {
@@ -55,7 +56,7 @@ export default function LoginForm({ user, setUser }) {
           登录
         </Button>
         <div style={{ marginTop: "20px" }}>
-          Or <a href="#">register now!</a>
+          Or <Link to={"/register"}>register now!</Link>
         </div>
       </Form.Item>
     </Form>

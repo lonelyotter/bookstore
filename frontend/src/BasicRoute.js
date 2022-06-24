@@ -18,6 +18,7 @@ import UserManageView from "./view/UserManageView";
 import UsersStatisticView from "./view/UsersStatisticView";
 import BooksStatisticView from "./view/BooksStatisticView";
 import StatisticView from "./view/StatisticView";
+import RegisterView from "./view/RegisterView";
 
 export default function BasicRoute() {
   const [user, setUser] = useState(getUser());
@@ -28,6 +29,9 @@ export default function BasicRoute() {
       <Switch>
         <Route path={"/login"}>
           <LoginView user={user} setUser={setUser} />
+        </Route>
+        <Route path={"/register"}>
+          <RegisterView user={user} setUser={setUser} />
         </Route>
         <PrivateRoute path={"/cart"} component={CartView} />
         <PrivateRoute path={"/books"} component={AllBooksView} />

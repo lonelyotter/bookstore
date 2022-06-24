@@ -51,5 +51,4 @@ public class CartItem {
     public void setNums(Integer nums) {
         this.nums = nums;
     }
-
 }

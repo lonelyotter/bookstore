@@ -17,11 +17,11 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/register")
-    public String register(@RequestBody Map<String, String> body) {
+    public void register(@RequestBody Map<String, String> body) {
         String username = body.get("username");
         String password = body.get("password");
         String email = body.get("email");
-        return userService.register(username, password, email);
+        userService.register(username, password, email);
     }
 
     @GetMapping("/admin/users")
