@@ -53,9 +53,7 @@ export function checkout(order) {
     method: "POST",
     url: "/checkout",
     data: { userId: userId, ...order },
-  })
-    .then((res) => res.data)
-    .catch((err) => err);
+  }).then((res) => res);
 }
 
 export function getOrders(name) {

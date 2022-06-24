@@ -11,8 +11,10 @@ import com.bookstore.backend.service.OrderService;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -30,17 +32,17 @@ public class OrderServiceImpl implements OrderService {
     UserDao userDao;
 
     @Override
-    public String checkout(Integer userId, String name, String phone, String address, String note) {
+    public void checkout(Integer userId, String name, String phone, String address, String note) {
         List<CartItem> items = cartDao.getCartItems(userId);
         if (items.isEmpty())
-            return "购物车没有商品";
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "购物车没有商品");
 
         // 判断是否有商品库存不足并同时计算订单总价
         double totalPrice = 0.0;
         for (CartItem item : items) {
             int inventory = bookDao.getBook(item.getBook().getId()).getInventory();
             if (inventory < item.getNums()) {
-                return item.getBook().getName() + "库存不足，仅剩" + inventory + "本";
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, item.getBook().getName() + "库存不足，仅剩" + inventory + "本");
             }
             totalPrice += item.getBook().getPrice() * item.getNums();
         }
@@ -55,7 +57,6 @@ public class OrderServiceImpl implements OrderService {
         Integer orderId = orderDao.createOrder(userId, name, phone, address, note, totalPrice);
         items.forEach(item -> orderDao.addBookForOrder(orderId, item.getBook().getId(), item.getNums()));
         cartDao.clearCart(userId);
-        return "购买成功";
     }
 
     private List<Order> filterOrdersByName(List<Order> orders, String name) {

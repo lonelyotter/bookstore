@@ -23,14 +23,13 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping("/checkout")
-    public String checkout(@RequestBody Map<String, String> body) {
+    public void checkout(@RequestBody Map<String, String> body) {
         AuthUserDetail user = (AuthUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = body.get("name");
         String note = body.get("note");
         String phone = body.get("phone");
         String address = body.get("address");
-
-        return orderService.checkout(user.getId(), name, phone, address, note);
+        orderService.checkout(user.getId(), name, phone, address, note);
     }
 
     @GetMapping("/orders")

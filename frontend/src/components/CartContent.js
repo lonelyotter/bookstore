@@ -38,8 +38,11 @@ export default function CartContent() {
 
   const onFinish = (values) => {
     checkout(values)
-      .then((r) => message.info(r))
-      .then(() => updateCart());
+      .then(() => {
+        message.info("购买成功");
+        updateCart();
+      })
+      .catch((err) => message.error(err.response.data.message));
   };
 
   const validateMessages = {
